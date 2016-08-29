@@ -1,0 +1,33 @@
+body {
+  background: #fff;
+  font-family:"Times New Roman", sans-serif;
+  font-size: 12px;
+}
+.head {
+	margin-top: 10px;
+	text-align: center;
+}
+.head u {
+		font-size: 16px;
+}
+.head span {
+	font-size: 12px;
+}
+table {
+  line-height: 25px;
+}
+.tanda-tangan {
+  text-align: center;
+  margin-left: 400px;
+}
+
+table tr td {
+  vertical-align: top;
+}
+table.catatan {
+  line-height: 18px;
+}
+
+.content {
+  padding: 20px 40px;
+}
