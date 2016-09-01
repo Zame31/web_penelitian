@@ -7,6 +7,7 @@
           <ul>
             <li><a href="<?php echo site_url('penelitian/lihat'); ?>">Lihat Penelitian</a></li>
             <li><a href="<?php echo site_url('penelitian/tambah'); ?>">Tambah Pengajuan</a></li>
+            <li><a href="<?php echo site_url('penelitian/laporan'); ?>">Cetak Laporan</a></li>
           </ul>
         </div>
       </li>

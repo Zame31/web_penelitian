@@ -18,43 +18,33 @@
           <tr>
             <td width="150px">a. Nama </td>
             <td>:</td>
-            <td>dr.Hj.NINA MANAROSANA.R.M.Kes.</td>
+            <td><?php echo $news_item['nama_pejabat']; ?></td>
           </tr>
           <tr>
             <td>b. Jabatan </td>
             <td>:</td>
-            <td>Sekretaris Dinas Kesehatan Kota Bandung</td>
+            <td><?php echo $news_item['jabatan']; ?></td>
           </tr>
         </table>
         Dengan ini menerangkan bahwa :
         <table>
           <tr>
-            <td width="150px">c. Nama </td>
+            <td width="150px">a. Nama </td>
             <td>:</td>
             <td><?php echo $news_item['nama']; ?></td>
           </tr>
           <tr>
-            <td>d. Alamat </td>
+            <td>b. Alamat </td>
             <td>:</td>
             <td><?php echo $news_item['alamat']; ?></td>
           </tr>
           <tr>
-            <td>e. Pekerjaan / NPM </td>
-            <td>:</td>
-            <td><?php echo $news_item['pekerjaan']; ?></td>
-          </tr>
-          <tr>
-            <td>f. Institusi Pendidikan </td>
-            <td>:</td>
-            <td><?php echo $news_item['institusi']; ?></td>
-          </tr>
-          <tr>
-            <td>g. Maksud </td>
+            <td>c. Maksud </td>
             <td>:</td>
             <td><?php echo $news_item['maksud']; ?></td>
           </tr>
           <tr>
-            <td>g. Waktu Pelaksanaan </td>
+            <td>d. Waktu Pelaksanaan </td>
             <td>:</td>
             <td>Terhitung mulai tanggal <?php echo  tgl_indo($news_item['waktu_mulai']);?> s.d  <?php echo tgl_indo($news_item['waktu_selesai']);?></td>
           </tr>
@@ -70,8 +60,7 @@
         Surat Keterangan ini diterbitkan atas dasar :
        <br>a.	Surat pengantar dari Kepala Badan Kesatuan Bangsa dan Pemberdayaan Masyarakat Kota Bandung (BKBPM) Nomor :
         <?php echo $news_item['no_bkbpm']; ?> , <?php echo tgl_indo($news_item['tanggal_bkbpm']); ?>
-       <br>b. Surat Pengantar dari Fak.Teknik dan Ilmu komputer UNIKOM Bandung Tanggal 1
-       Agustus 2016 Nomor : 172/KP/Ka.Prodi-FTIK-IFSI/VII/2016
+       <br>b. <?php echo $news_item['surat']; ?>
        <br>
        Berhubungan dengan maksud bersangkutan, diminta agar unit kerja yang terkait memberikan bantuan serta fasilitas seperlunya sepanjang tidak mengganggu kelancaran dan menyangkut rahasia jabatan.
        <br>
@@ -91,25 +80,56 @@
      <br>
      <br>
      <br>
-     <u>dr.Hj.NINA MANAROSANA.R.M.Kes.</u><br>
-     Pembina Tk.I <br>
-     NIP.196603191997032001
+     <u><?php echo $news_item['nama_pejabat']; ?></u><br>
+     <?php echo $news_item['golongan']; ?> <br>
+     NIP.<?php echo $news_item['nip']; ?>
    </div>
   <br>
   <table class="catatan">
    <tr>
      <td width="40px" style="vertical-align:top"></td>
      <td>
+
+      <?php
+        if ($news_item['jenis_surat'] == 'penelitian') {
+          $jenis ="Bidang Bina Program";
+        } elseif ($news_item['jenis_surat'] == 'pkl') {
+          $jenis ="Sub. Bagian Umum";
+        } elseif ($news_item['jenis_surat'] == 'pkl_medis') {
+          $jenis ="Bidang Sumber Daya Kesehatan ";
+        }
+      ?>
+
        <u>CATATAN</u><br>
-       -Agar membuat laporan hasil kegiatan melalui Kepala sub.Bagian Umum Dinas
+       -Agar membuat laporan hasil kegiatan melalui Kepala <?php echo $jenis ?>  Dinas
        Kesehatan Kota Bandung
        <br><br>
-       Tebusan :<br>
-       1.	Kepala Dinas Kesehatan Kota Bandung  (Sebagai Laporan)<br>
-       2.	Kepala Bidang Pelayanan Kesehatan <br>
-       3.	Kepala Bidang Sumber Daya Kesehatan <br>
-       4.	Kepala Bidang P2PL <br>
-       5.	Kepala UPT Puskesmas Cipamokolan
+
+       Tembusan, disampaikan kepada Yth   :<br>
+       <?php
+       $hobi=array('Kepala Dinas Kesehatan Kota Bandung (Sebagai Laporan)',
+                   'Kepala Bidang Pelayanan Kesehatan',
+                   'Kepala Bidang Sumber Daya Kesehatan',
+                   'Kepala Bidang P2PL',
+                   'Kepala UPT Puskesmas Se-Kota Bandung',
+                   'Kepala Bina Program Kesehatan',
+                   'Kepala Sub. Bagian Keuangan',
+                   'Kepala Sub. Bagian Kepegawaian',
+                   'Kepala Sub. Bagian Umum');
+
+       if(!empty($news_item['tembusan'])){
+
+         $tmp=explode(',',strrev($news_item['tembusan']));
+
+         for ($c=0;$c<count($tmp);$c++){
+           $temb=$tmp[$c];
+           $no=$c+1;
+           echo $no.". ".$hobi[$temb]."<br> ";
+         };
+       } else {
+         echo "tembusan kosong";
+       }
+      ?>
 
     </td>
   </tr>

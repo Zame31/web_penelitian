@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+date_default_timezone_set('Asia/Jakarta');
 //untuk mengetahui bulan bulan
 if ( ! function_exists('bulan'))
 {

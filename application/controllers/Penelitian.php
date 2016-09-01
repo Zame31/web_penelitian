@@ -10,6 +10,25 @@ class Penelitian extends CI_Controller {
 		$this->load->helper('date_helper');
   }
 
+	public function laporan(){
+		$this->load->view('templates/header');
+		$this->load->view('templates/menu');
+		$this->load->view('penelitian/laporan');
+		$this->load->view('templates/footer');
+	}
+	public function cetak_laporan(){
+		$data['penelitian'] = $this->penelitian_model->get_laporan();
+
+		$html=$this->load->view('penelitian/laporan_pdf', $data, true);
+
+		$this->load->library('m_pdf_lanscape');
+
+		$pdf = $this->m_pdf_lanscape->load();
+		$pdf->WriteHTML($html);
+
+		$pdf->Output('laporan.pdf',I);
+	}
+
 	public function view(){
     $this->load->view('templates/header');
     $this->load->view('templates/menu');

@@ -5,11 +5,12 @@
         $this->load->database();
       }
 
-      function get_penelitian(){
+      public function get_penelitian(){
         $this->db->select("*");
         $this->db->from("penelitian");
         $this->db->join("pengaju", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
-        $this->db->order_by("id_penelitian","desc");
+
+        $this->db->order_by("waktu_pembuatan","asc");
         $query = $this->db->get();
             if ($query->num_rows() >0){
                 foreach ($query->result() as $data) {
@@ -20,10 +21,33 @@
             }
       }
 
+      public function get_laporan(){
+        $this->db->select("*");
+        $this->db->from("penelitian");
+        $this->db->join("pengaju", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
+
+        $this->db->where('month(waktu_pembuatan) >=', '08');
+        $this->db->where('month(waktu_pembuatan) <=', '08');
+        $this->db->where('year(waktu_pembuatan) >=', '2016');
+        $this->db->where('year(waktu_pembuatan) <=', '2017');
+        $this->db->order_by("waktu_pembuatan","asc");
+        $query = $this->db->get();
+            if ($query->num_rows() >0){
+                foreach ($query->result() as $data) {
+                    # code...
+                    $penelitian[] = $data;
+                }
+            return $penelitian; //hasil dari semua proses ada dimari
+            }
+      }
+
+
+
       public function get_penelitian_id($id = FALSE){
         $this->db->select("*");
         $this->db->from("penelitian");
         $this->db->join("pengaju", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
+        $this->db->join("pejabat", "pejabat.id_pejabat = penelitian.id_pejabat","inner");
         $this->db->where('id_penelitian', $id);
         $query = $this->db->get();
         return $query->row_array();
@@ -32,24 +56,41 @@
       public function set_penelitian(){
         $this->load->helper('url');
 
-
         $data1 = array (
           //nama table database => nama dari form
           'nama'=> $this->input->post('nama'),
-          'alamat'=> $this->input->post('alamat'),
-          'pekerjaan'=> $this->input->post('pekerjaan'),
-          'institusi'=> $this->input->post('institusi')
+          'alamat'=> $this->input->post('alamat')
         );
 
         $this->db->insert('pengaju', $data1);
 
         $id_pejabat = "P01";
+
+        if(!empty($this->input->post('hobi'))){
+          $hobinya='';
+          $jml_data=count($hobi);
+          $hobi_dipilih= $this->input->post('hobi');
+
+          for($b=0;$b<count($this->input->post('hobi'));$b++){
+            $hobinya=$hobinya.$hobi_dipilih[$b].',';
+            $hobi_to_sql=substr(strrev($hobinya),1);
+          }
+        } else {
+          $hobi_to_sql = '';
+        }
+
+        $hari_ini = date("Y-m-d");
+
         $data = array (
+          'waktu_pembuatan'=> $hari_ini,
+          'jenis_surat'=> $this->input->post('jenis_surat'),
           'maksud'=> $this->input->post('maksud'),
           'waktu_mulai'=> $this->input->post('mulai'),
           'waktu_selesai'=> $this->input->post('selesai'),
           'no_bkbpm'=> $this->input->post('no_bkbpm'),
           'tanggal_bkbpm'=> $this->input->post('tanggal_bkbpm'),
+          'surat'=> $this->input->post('surat'),
+          'tembusan'=> $hobi_to_sql,
           'id_pejabat'=> $id_pejabat,
           'id_pengaju'=> $this->db->insert_id()
 
@@ -74,9 +115,8 @@
         $data1 = array (
           //nama table database => nama dari form
           'nama'=> $this->input->post('nama'),
-          'alamat'=> $this->input->post('alamat'),
-          'pekerjaan'=> $this->input->post('pekerjaan'),
-          'institusi'=> $this->input->post('institusi')
+          'alamat'=> $this->input->post('alamat')
+
         );
         $this->db->where('id_pengaju', $id_pengaju);
         $this->db->update('pengaju', $data1);

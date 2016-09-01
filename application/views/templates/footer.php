@@ -4,9 +4,29 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-    $('#example').DataTable();
-} );
+	$(document).ready(function() {
+			$('#example').DataTable( {
+					"searching": true,
+					"language": {
+							"zeroRecords": "Nothing found - sorry",
+							"info": "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Data",
+							"infoEmpty": "Tidak Ada Data",
+							"lengthMenu": "",
+					"decimal": ",",
+							"thousands": ".",
+
+							"paginate": {
+							"first":      "Pertama",
+							"last":       "Terakhir",
+							"next":       "Berikutnya",
+							"previous":   "Sebelumnya"
+					}
+
+					}
+			} );
+	} );
+
+
 	</script>
 
 
@@ -23,7 +43,12 @@ $(document).ready(function(){
 // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
 $('.modal-trigger').leanModal();
 });
+
+$(document).ready(function() {
+	$('select').material_select();
+});
 </script>
+
 
 </body>
 </html>

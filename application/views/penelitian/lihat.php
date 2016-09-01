@@ -7,10 +7,9 @@
       <thead>
         <tr>
           <th>No</th>
+          <th>Tanggal Dibuat Surat</th>
           <th>nama</th>
-          <th>alamat</th>
-          <th>pekerjaan</th>
-          <th>institusi</th>
+
           <th>Maksud</th>
           <th>Waktu Mulai</th>
           <th>Waktu Selesai</th>
@@ -27,15 +26,13 @@
         <tr>
           <!-- atribut di table database -->
           <td><?php echo $i; ?></td>
+          <td><?php echo tgl_indo($news_item->waktu_pembuatan); ?></td>
           <td><?php echo $news_item->nama; ?></td>
-          <td><?php echo $news_item->alamat; ?></td>
-          <td><?php echo $news_item->pekerjaan; ?></td>
-          <td><?php echo $news_item->institusi; ?></td>
           <td><?php echo $news_item->maksud; ?></td>
           <td><?php echo tgl_indo($news_item->waktu_mulai); ?></td>
           <td><?php echo tgl_indo($news_item->waktu_selesai); ?></td>
           <td>
-            <a class="waves-effect waves-light btn green lighten-1 pad" href="<?php echo site_url('penelitian/cetak/'.$news_item->id_penelitian); ?>">
+            <a class="waves-effect waves-light btn green lighten-1 pad" target="_blank" href="<?php echo site_url('penelitian/cetak/'.$news_item->id_penelitian); ?>">
               <i class="material-icons">print</i>
             </a>
             <a class="waves-effect waves-light btn blue lighten-1 pad" href="<?php echo site_url('penelitian/update/'.$news_item->id_penelitian); ?>">
@@ -57,7 +54,7 @@
           </div>
         </div>
 
-          <?php $i++;} } ?>
+          <?php } } ?>
         </tbody>
     </table>
 

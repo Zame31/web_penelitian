@@ -8,7 +8,11 @@ $route['penelitian/lihat'] = 'penelitian/view';
 //tambah data
 $route['penelitian/tambah'] = 'penelitian/tambah';
 
-//cetak
+//Laporan
+$route['penelitian/laporan'] = 'penelitian/laporan';
+$route['penelitian/cetak_laporan'] = 'penelitian/cetak_laporan';
+
+//update
 $route['penelitian/update/(:any)'] = 'penelitian/update/$1';
 
 //cetak

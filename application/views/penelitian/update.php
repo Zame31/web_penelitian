@@ -9,6 +9,19 @@
 
       <div class="col s12">
         <?php echo validation_errors(); ?>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <select name="jenis_surat">
+              <option value="" disabled>Pilih Jenis Surat</option>
+              <option value="penelitian" <?php if ($news_item['jenis_surat'] == 'penelitian'){echo 'selected';}?> >Penelitian/Skripsi</option>
+              <option value="pkl" <?php if ($news_item['jenis_surat'] == 'pkl'){echo 'selected';}?>>Praktek Kerja Lapangan(PKL) non Medis</option>
+              <option value="pkl_medis" <?php if ($news_item['jenis_surat'] == 'pkl_medis'){echo 'selected';}?>>Praktek Kerja Lapangan(PKL) Medis</option>
+            </select>
+            <label>Jenis Surat</label>
+          </div>
+        </div>
+
         <div class="row">
           <div class="s12">
             <p class="z-depth-1 sub-tit">Dengan ini menerangkan bahwa :</p>
@@ -28,18 +41,6 @@
           <div class="input-field col s12">
             <input type="text" class="validate" name="alamat" value="<?php echo $news_item['alamat'] ?>">
             <label data-error="salah" data-success="benar">Alamat</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input type="text" class="validate" name="pekerjaan" value="<?php echo $news_item['pekerjaan'] ?>">
-            <label data-error="salah" data-success="benar">Pekerjaan/NPM</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input type="text" class="validate" name="institusi" value="<?php echo $news_item['institusi'] ?>">
-            <label data-error="salah" data-success="benar">Institusi</label>
           </div>
         </div>
         <div class="row">
@@ -87,12 +88,17 @@
             Surat Pengantar lainnya
           </div>
         </div>
+
         <div class="row">
           <div class="input-field col s12">
-            <input type="text" class="validate" name="surat">
+            <input type="text" class="validate" name="surat" value="<?php echo $news_item['surat'] ?>">
             <label data-error="salah" data-success="benar">Surat</label>
           </div>
         </div>
+
+        
+         <br><br><br>
+
         <button class="btn waves-effect waves-light" type="submit" name="action">Simpan
           <i class="material-icons right">send</i>
         </button>
