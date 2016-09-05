@@ -1,19 +1,21 @@
+<?php if ($this->session->flashdata('success_msg')) { ?>
+      <div id="snackbar"> <?php echo $this->session->flashdata('success_msg') ?> </div>
+  <?php } ?>
 <main>
   <div class="title">
     Lihat Pengajuan Penelitian
   </div>
   <div class="content ">
-    <table class="highlight" id="example">
+    <table class="highlight striped" id="example">
       <thead>
         <tr>
           <th>No</th>
-          <th>Tanggal Dibuat Surat</th>
-          <th>nama</th>
-
+          <th width="130px">Waktu Pembuatan Surat</th>
+          <th width="160px">nama</th>
           <th>Maksud</th>
-          <th>Waktu Mulai</th>
-          <th>Waktu Selesai</th>
-          <th width="120px">Cetak</th>
+          <th  width="100px">Waktu Mulai Penelitian</th>
+          <th  width="100px">Waktu Selesai Penelitian</th>
+          <th width="120px">Control</th>
         </tr>
       </thead>
       <tbody>
@@ -22,10 +24,11 @@
         <?php
         $i=1;
         if ($penelitian > 0 ) {
+
         foreach ($penelitian as $news_item) { ?>
         <tr>
           <!-- atribut di table database -->
-          <td><?php echo $i; ?></td>
+          <td align="center"><?php echo $i; ?></td>
           <td><?php echo tgl_indo($news_item->waktu_pembuatan); ?></td>
           <td><?php echo $news_item->nama; ?></td>
           <td><?php echo $news_item->maksud; ?></td>
@@ -54,7 +57,7 @@
           </div>
         </div>
 
-          <?php } } ?>
+          <?php $i++;} } ?>
         </tbody>
     </table>
 

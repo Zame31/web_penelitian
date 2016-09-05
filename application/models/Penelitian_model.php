@@ -22,23 +22,30 @@
       }
 
       public function get_laporan(){
+
+        $b1 = $this->input->post('b1');
+        $b2 = $this->input->post('b2');
+        $t1 = $this->input->post('t1');
+        $t2 = $this->input->post('t2');
+
         $this->db->select("*");
         $this->db->from("penelitian");
         $this->db->join("pengaju", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
 
-        $this->db->where('month(waktu_pembuatan) >=', '08');
-        $this->db->where('month(waktu_pembuatan) <=', '08');
-        $this->db->where('year(waktu_pembuatan) >=', '2016');
-        $this->db->where('year(waktu_pembuatan) <=', '2017');
+        $this->db->where('month(waktu_pembuatan) >=', $b1);
+        $this->db->where('month(waktu_pembuatan) <=', $b2);
+        $this->db->where('year(waktu_pembuatan) >=', $t1);
+        $this->db->where('year(waktu_pembuatan) <=', $t2);
         $this->db->order_by("waktu_pembuatan","asc");
         $query = $this->db->get();
-            if ($query->num_rows() >0){
-                foreach ($query->result() as $data) {
-                    # code...
-                    $penelitian[] = $data;
-                }
-            return $penelitian; //hasil dari semua proses ada dimari
+
+        if ($query->num_rows() >0){
+            foreach ($query->result() as $data) {
+              $penelitian[] = $data;
             }
+        return $penelitian;
+        }
+
       }
 
 
@@ -59,7 +66,8 @@
         $data1 = array (
           //nama table database => nama dari form
           'nama'=> $this->input->post('nama'),
-          'alamat'=> $this->input->post('alamat')
+          'alamat'=> $this->input->post('alamat'),
+          'institusi'=> $this->input->post('institusi')
         );
 
         $this->db->insert('pengaju', $data1);
@@ -90,6 +98,8 @@
           'no_bkbpm'=> $this->input->post('no_bkbpm'),
           'tanggal_bkbpm'=> $this->input->post('tanggal_bkbpm'),
           'surat'=> $this->input->post('surat'),
+          'no_surat'=> $this->input->post('no_surat'),
+          'tanggal_surat'=> $this->input->post('tanggal_surat'),
           'tembusan'=> $hobi_to_sql,
           'id_pejabat'=> $id_pejabat,
           'id_pengaju'=> $this->db->insert_id()

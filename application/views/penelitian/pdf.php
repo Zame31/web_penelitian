@@ -5,13 +5,13 @@
 <div class="content">
   <div class="head">
     <u>SURAT KETERANGAN</u><br>
-    <span>NOMOR : 070/29392-Dinkes.</span>
+    <span>NOMOR : 070/     -Dinkes.</span>
   </div>
   <br><br>
 
   <table>
     <tr>
-      <td width="40px" style="vertical-align:top">1. </td>
+      <td width="20px" style="vertical-align:top">1. </td>
       <td>
         Yang bertanda tangan di bawah ini :
         <table>
@@ -55,24 +55,37 @@
 
   <table>
     <tr>
-      <td width="40px" style="vertical-align:top">2.</td>
+      <td></td>
       <td>
-        Surat Keterangan ini diterbitkan atas dasar :
-       <br>a.	Surat pengantar dari Kepala Badan Kesatuan Bangsa dan Pemberdayaan Masyarakat Kota Bandung (BKBPM) Nomor :
-        <?php echo $news_item['no_bkbpm']; ?> , <?php echo tgl_indo($news_item['tanggal_bkbpm']); ?>
-       <br>b. <?php echo $news_item['surat']; ?>
-       <br>
+        Surat Keterangan ini dibuat atas dasar :
+        <table>
+          <tr>
+            <td style="vertical-align:top">a.</td>
+            <td align="justify">Surat pengantar dari Kepala Badan Kesatuan Bangsa dan Pemberdayaan Masyarakat Kota Bandung (BKBPM) Nomor :
+             <?php echo $news_item['no_bkbpm']; ?> , <?php echo tgl_indo($news_item['tanggal_bkbpm']); ?></td>
+          </tr>
+          <tr>
+            <td style="vertical-align:top">b.</td>
+            <td align="justify">Surat permohonan dari <?php echo $news_item['surat']; ?>
+              Nomor: <?php echo $news_item['no_surat']; ?>,
+              Tanggal <?php echo tgl_indo($news_item['tanggal_surat']); ?>
+            </td>
+          </tr>
+        </table>
+
+     </td>
+   </tr>
+   <tr>
+     <td width="20px" style="vertical-align:top">2.</td>
+     <td align="justify">
        Berhubungan dengan maksud bersangkutan, diminta agar unit kerja yang terkait memberikan bantuan serta fasilitas seperlunya sepanjang tidak mengganggu kelancaran dan menyangkut rahasia jabatan.
-       <br>
      </td>
    </tr>
   </table>
   <br>
    <div class="tanda-tangan">
-     ditetapkan di : Bandung <br>
-
-     Pada tanggal : <?php echo tgl_indo(date('Y-m-d'));?>
- <br>
+     Bandung, <?php echo tgl_indo(date('Y-m-d'));?>
+ <br><br>
      A.n.KEPALA DINAS KESEHATAN <br>
      KOTA BANDUNG <br>
      Sekretaris
@@ -80,7 +93,7 @@
      <br>
      <br>
      <br>
-     <u><?php echo $news_item['nama_pejabat']; ?></u><br>
+     <u><b><?php echo $news_item['nama_pejabat']; ?></b></u><br>
      <?php echo $news_item['golongan']; ?> <br>
      NIP.<?php echo $news_item['nip']; ?>
    </div>

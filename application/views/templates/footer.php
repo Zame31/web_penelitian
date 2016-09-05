@@ -3,6 +3,12 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 
+<script>
+		var x = document.getElementById("snackbar")
+		x.className = "show";
+		setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	</script>
+
 	<script type="text/javascript">
 	$(document).ready(function() {
 			$('#example').DataTable( {
@@ -25,8 +31,6 @@
 					}
 			} );
 	} );
-
-
 	</script>
 
 

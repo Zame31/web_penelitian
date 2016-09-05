@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2016 at 04:02 AM
+-- Generation Time: Sep 05, 2016 at 11:32 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -57,24 +57,12 @@ CREATE TABLE `penelitian` (
   `no_bkbpm` varchar(100) NOT NULL,
   `tanggal_bkbpm` date NOT NULL,
   `surat` varchar(300) NOT NULL,
+  `no_surat` varchar(100) NOT NULL,
+  `tanggal_surat` date NOT NULL,
   `tembusan` varchar(100) NOT NULL,
   `id_pejabat` char(8) NOT NULL,
   `id_pengaju` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `penelitian`
---
-
-INSERT INTO `penelitian` (`id_penelitian`, `waktu_pembuatan`, `jenis_surat`, `maksud`, `waktu_mulai`, `waktu_selesai`, `no_bkbpm`, `tanggal_bkbpm`, `surat`, `tembusan`, `id_pejabat`, `id_pengaju`) VALUES
-(35, '2016-09-30', 'penelitian', 'Penelitian di Lingkungan Dinas Kesehatan Kota Bandung yang terkait tentang Hubungan Persepsi Lansia', '2016-08-01', '2016-08-31', '070/1691/BKBPM', '2016-08-01', 'Surat permohonan dari Ketua STIKes Bhakti Kencana Bandung No.500/STIes-BK/YAGK/f.1/VIII/2016, Tanggal 09 Agustus 2016', '3,2,1,0', 'P01', 31),
-(36, '2016-11-30', 'pkl', 'Penelitian di Lingkungan Dinas Kesehatan Kota Bandung yang terkait tentang Hubungan Persepsi Lansia', '2016-08-01', '2016-09-30', '070/1691/BKBPM', '2016-08-11', 'Surat permohonan dari Ketua STIKes Bhakti Kencana Bandung No.500/STIes-BK/YAGK/f.1/VIII/2016, Tanggal 09 Agustus 2016', '5,4,3,2', 'P01', 32),
-(37, '2016-10-21', 'pkl', 'Penelitian Dinas Kesehatan', '2016-09-01', '2016-10-31', '070/1691/BKBPM', '2016-08-03', 'b.	Surat permohonan dari Ketua STIKes Bhakti Kencana Bandung     No.500/STIes-BK/YAGK/f.1/VIII/2016, Tanggal 09 Agustus 2016', '2,1,0', 'P01', 33),
-(38, '2014-08-31', 'pkl_medis', 'Penelitian Laptop', '2016-08-18', '2016-10-31', '070/1691/BKBPM', '2016-08-10', 'b.	Surat permohonan dari Ketua STIKes Bhakti Kencana Bandung     No.500/STIes-BK/YAGK/f.1/VIII/2016, Tanggal 09 Agustus 2016', '6,5,4,2', 'P01', 34),
-(39, '2016-12-31', 'pkl_medis', 'Penelitian Laptop', '2016-08-18', '2016-10-31', '070/1691/BKBPM', '2016-08-10', 'b.	Surat permohonan dari Ketua STIKes Bhakti Kencana Bandung     No.500/STIes-BK/YAGK/f.1/VIII/2016, Tanggal 09 Agustus 2016', '6,5,4,2', 'P01', 35),
-(40, '2017-08-31', 'pkl_medis', 'Penelitian Aceh Pasai', '2016-08-01', '2016-09-30', '070/1691/BKBPM', '2016-09-30', 'b.	Surat permohonan dari Ketua STIKes Bhakti Kencana Bandung     No.500/STIes-BK/YAGK/f.1/VIII/2016, Tanggal 09 Agustus 2016', '8,7,5,0', 'P01', 36),
-(41, '2016-08-31', 'pkl_medis', 'Penelitian Aceh Pasai', '2016-08-01', '2016-09-30', '070/1691/BKBPM', '2016-09-30', 'b.	Surat permohonan dari Ketua STIKes Bhakti Kencana Bandung     No.500/STIes-BK/YAGK/f.1/VIII/2016, Tanggal 09 Agustus 2016', '8,7,5,0', 'P01', 37),
-(42, '2016-09-22', 'penelitian', 'Penelitian di Lingkungan Dinas Kesehatan Kota Bandung yang terkait tentang Hubungan Persepsi Lansia ', '2016-10-01', '2016-11-30', '073/1691/BKBPM', '2016-09-05', 'Surat permohonan dari Ketua STIKes Bhakti Kencana Bandung No.500/STIes-BK/YAGK/f.1/VIII/2016, Tanggal 09 Agustus 2016', '8,7,5,2,1,0', 'P01', 38);
 
 -- --------------------------------------------------------
 
@@ -85,22 +73,19 @@ INSERT INTO `penelitian` (`id_penelitian`, `waktu_pembuatan`, `jenis_surat`, `ma
 CREATE TABLE `pengaju` (
   `id_pengaju` int(11) NOT NULL,
   `nama` varchar(200) NOT NULL,
-  `alamat` varchar(200) NOT NULL
+  `alamat` varchar(200) NOT NULL,
+  `institusi` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pengaju`
 --
 
-INSERT INTO `pengaju` (`id_pengaju`, `nama`, `alamat`) VALUES
-(31, 'Hakam Arif Rahmani', 'JL. Tebet Raya No. 84, Tebet, Jakarta Selatan'),
-(32, 'Halibab Raima', 'Jl. KH. Agus Salim No. 29A Jakarta Pusat'),
-(33, 'Syekh Abdul Rouf Lekal', 'Samudra Pasai, Pasai, Aceh'),
-(34, 'Malikul Dhohir', 'Perlak Aceh'),
-(35, 'Malikul Dhohir', 'Perlak Aceh'),
-(36, 'Al Malikul Saleh', 'Samudra Pasai, Aceh Pasai'),
-(37, 'Al Malikul Saleh', 'Samudra Pasai, Aceh Pasai'),
-(38, 'Teuku Umar ', 'Meulaboh Aceh Besar');
+INSERT INTO `pengaju` (`id_pengaju`, `nama`, `alamat`, `institusi`) VALUES
+(1, 'lakdfjs', 'slkdjfas', 'sladjf'),
+(2, 'a', 'vvv', ''),
+(3, 'aaa', 'aaa', ''),
+(4, 'asdasdasd', 'asdasdas\r\nasdasasdas\r\ndasd', 'asdasd');
 
 -- --------------------------------------------------------
 
@@ -199,12 +184,12 @@ ALTER TABLE `tembusan`
 -- AUTO_INCREMENT for table `penelitian`
 --
 ALTER TABLE `penelitian`
-  MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `pengaju`
 --
 ALTER TABLE `pengaju`
-  MODIFY `id_pengaju` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_pengaju` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --

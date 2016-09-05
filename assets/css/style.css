@@ -6,9 +6,21 @@ body{
 	font-family: 'Roboto', sans-serif;
 }
 main{
-	margin-left: 300px;
+	margin-left: 220px;
 }
-
+@media screen and (max-width: 480px) {
+	main{
+		margin-left: 0px;
+	}
+}
+@media screen and (max-width: 780px) {
+	main{
+		margin-left: 0px;
+	}
+}
+table {
+	font-size: 14px;
+}
 /*main*/
 .title {
 	background: #26a69a;
@@ -39,6 +51,21 @@ main{
 }
 
 /*custom material*/
+[type="checkbox"]+label {
+	color: #3a3a3a;
+	margin-bottom: 10px;
+}
+table.striped>tbody>tr>td {
+    vertical-align: text-top;
+    border-radius: 0;
+}
+table.highlight>tbody>tr:hover {
+    background-color: #476562;
+    color: #fff;
+}
+.side-nav {
+    width: 220px;
+}
 .side-nav .collapsible-body li a,
 .side-nav.fixed .collapsible-body li a {
 	font-weight: 400;
@@ -54,5 +81,50 @@ input:not([type]).valid+label:after, input:not([type]):focus.valid+label:after, 
     margin-right: 23px;
 }
 #modal_delete.modal {
+	margin-top: 150px;
 	width: 35%;
 }
+
+/*toast*/
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+/*end toast*/
