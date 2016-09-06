@@ -12,10 +12,10 @@ class Penelitian extends CI_Controller {
   }
 	public function validasi(){
 		$katakata = array('required' => 'Kolom <b> "%s" </b> Harus di isi. ');
-		$this->form_validation->set_rules('jenis_surat','Dibuat Untuk','required|trim',$katakata);
+		$this->form_validation->set_rules('jenis_surat','Dibuat Untuk','required',$katakata);
 		$this->form_validation->set_rules('institusi','Institusi','required',$katakata);
 		$this->form_validation->set_rules('nama','Nama','required',$katakata);
-		$this->form_validation->set_rules('alamat','Alamat','required|is_unique[pengaju.alamat]',$katakata);
+		$this->form_validation->set_rules('alamat','Alamat','required',$katakata);
 		$this->form_validation->set_rules('maksud','Maksud','required|is_unique[penelitian.maksud]',$katakata);
 		$this->form_validation->set_rules('mulai','Mulai','required',$katakata);
 		$this->form_validation->set_rules('selesai','Selesai','required',$katakata);
@@ -25,6 +25,7 @@ class Penelitian extends CI_Controller {
 		$this->form_validation->set_rules('no_surat','Nomor Surat','required',$katakata);
 		$this->form_validation->set_rules('tanggal_surat','Tanggal Surat','required',$katakata);
 	}
+
 	public function laporan(){
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -70,25 +71,33 @@ class Penelitian extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-
-
 	public function tambah(){
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
 		$this->validasi();
 
+		// $nama = $this->input->post('nama');
+		// $alamat = $this->input->post('alamat');
+		// $this->db->select('id_pengaju');
+		// $this->db->from('pengaju');
+		// $this->db->where('nama', $nama);
+		// $this->db->where('alamat', $alamat);
+		// $query = $this->db->get();
+		// $data = $query->result_array();
+		//
+		// $num = $query->num_rows();
+
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
 
 		if ($this->form_validation->run()) {
 			$this->penelitian_model->set_penelitian();
-
 			$id=$this->penelitian_model->getLastInserted();
-
 			$this->cetak($id);
-    }else{
-      $this->load->view('penelitian/tambah');
+    }
+		else {
+    	$this->load->view('penelitian/tambah');
     }
 
 

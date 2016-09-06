@@ -1,9 +1,10 @@
-
+<?php if ($this->session->flashdata('success_msg')) { ?>
+      <div id="snackbar"> <?php echo $this->session->flashdata('success_msg') ?> </div>
+  <?php } ?>
 <?php
-
-  //$attributes = array('target' => '_blank','onsubmit' => "setTimeout('location.reload()', 500);");
-  echo form_open('penelitian/tambah'); ?>
-
+$attributes = array('target' => '_blank','onsubmit' => "setTimeout('location.reload()', 500);");
+echo form_open('penelitian/tambah',$attributes);
+?>
 <main>
   <div class="title">
     Tambah Pengajuan Penelitian
@@ -23,11 +24,11 @@
             <label>Dibuat Untuk :</label>
           </div>
           <div class="input-field col s6">
-            <input type="text" class="validate" name="institusi" value="<?php echo set_value('institusi'); ?>">
+            <input type="text" class="autocomplete" name="institusi" value="<?php echo set_value('institusi'); ?>">
             <label data-error="salah" data-success="benar">Dari Institusi</label>
           </div>
         </div>
-
+  
         <div class="row">
           <div class="col s12">
             <p class=" sub-tit">Dengan ini menerangkan bahwa :</p>

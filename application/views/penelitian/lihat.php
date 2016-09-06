@@ -41,13 +41,13 @@
             <a class="waves-effect waves-light btn blue lighten-1 pad" href="<?php echo site_url('penelitian/update/'.$news_item->id_penelitian); ?>">
               <i class="material-icons">update</i>
             </a>
-            <button data-target="modal_delete" class="btn red lighten-2 modal-trigger waves-effect waves-light pad">
+            <button data-target="modal_delete<?php echo $news_item->id_penelitian ?>" class="btn red lighten-2 modal-trigger waves-effect waves-light pad">
               <i class="material-icons">delete</i>
             </button>
           </td>
         </tr>
 
-        <div id="modal_delete" class="modal">
+        <div id="modal_delete<?php echo $news_item->id_penelitian ?>" class="delete modal">
           <div class="modal-content">
             <h6>anda yakin ingin menghapus data ini ?</h6>
           </div>

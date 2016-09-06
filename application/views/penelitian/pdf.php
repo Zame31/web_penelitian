@@ -1,11 +1,14 @@
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/print.css"/>
-<img src="<?php echo base_url('assets/img/kop.png'); ?>" />
+
+<div class="kop">
+  <img src="<?php echo base_url('assets/img/kop2.png'); ?>" />
+</div>
 
 
 <div class="content">
   <div class="head">
     <u>SURAT KETERANGAN</u><br>
-    <span>NOMOR : 070/     -Dinkes.</span>
+    <span>NOMOR : 070 /</span> <span class="gap">aaaaaa</span>- Dinkes.
   </div>
   <br><br>
 

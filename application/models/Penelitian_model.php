@@ -50,6 +50,7 @@
 
 
 
+
       public function get_penelitian_id($id = FALSE){
         $this->db->select("*");
         $this->db->from("penelitian");
@@ -63,50 +64,99 @@
       public function set_penelitian(){
         $this->load->helper('url');
 
-        $data1 = array (
-          //nama table database => nama dari form
-          'nama'=> $this->input->post('nama'),
-          'alamat'=> $this->input->post('alamat'),
-          'institusi'=> $this->input->post('institusi')
-        );
+        $nama = $this->input->post('nama');
+        $alamat = $this->input->post('alamat');
+        $this->db->select('id_pengaju');
+        $this->db->from('pengaju');
+        $this->db->where('nama', $nama);
+        $this->db->where('alamat', $alamat);
+        $query = $this->db->get();
+        $data_z = $query->result_array();
+        $num = $query->num_rows();
 
-        $this->db->insert('pengaju', $data1);
+        if ($num > 0) {
 
-        $id_pejabat = "P01";
+          $id_pejabat = "P01";
 
-        if(!empty($this->input->post('hobi'))){
-          $hobinya='';
-          $jml_data=count($hobi);
-          $hobi_dipilih= $this->input->post('hobi');
+          if(!empty($this->input->post('hobi'))){
+            $hobinya='';
+            $jml_data=count($hobi);
+            $hobi_dipilih= $this->input->post('hobi');
 
-          for($b=0;$b<count($this->input->post('hobi'));$b++){
-            $hobinya=$hobinya.$hobi_dipilih[$b].',';
-            $hobi_to_sql=substr(strrev($hobinya),1);
+            for($b=0;$b<count($this->input->post('hobi'));$b++){
+              $hobinya=$hobinya.$hobi_dipilih[$b].',';
+              $hobi_to_sql=substr(strrev($hobinya),1);
+            }
+          } else {
+            $hobi_to_sql = '';
           }
-        } else {
-          $hobi_to_sql = '';
+
+          $hari_ini = date("Y-m-d");
+
+          $data = array (
+            'waktu_pembuatan'=> $hari_ini,
+            'jenis_surat'=> $this->input->post('jenis_surat'),
+            'maksud'=> $this->input->post('maksud'),
+            'waktu_mulai'=> $this->input->post('mulai'),
+            'waktu_selesai'=> $this->input->post('selesai'),
+            'no_bkbpm'=> $this->input->post('no_bkbpm'),
+            'tanggal_bkbpm'=> $this->input->post('tanggal_bkbpm'),
+            'surat'=> $this->input->post('surat'),
+            'no_surat'=> $this->input->post('no_surat'),
+            'tanggal_surat'=> $this->input->post('tanggal_surat'),
+            'tembusan'=> $hobi_to_sql,
+            'id_pejabat'=> $id_pejabat,
+            'id_pengaju'=> $data_z[0]['id_pengaju']
+          );
+          $this->db->insert('penelitian', $data);
         }
 
-        $hari_ini = date("Y-m-d");
+        else {
+          $data1 = array (
+            //nama table database => nama dari form
+            'nama'=> $this->input->post('nama'),
+            'alamat'=> $this->input->post('alamat'),
+            'institusi'=> $this->input->post('institusi')
+          );
 
-        $data = array (
-          'waktu_pembuatan'=> $hari_ini,
-          'jenis_surat'=> $this->input->post('jenis_surat'),
-          'maksud'=> $this->input->post('maksud'),
-          'waktu_mulai'=> $this->input->post('mulai'),
-          'waktu_selesai'=> $this->input->post('selesai'),
-          'no_bkbpm'=> $this->input->post('no_bkbpm'),
-          'tanggal_bkbpm'=> $this->input->post('tanggal_bkbpm'),
-          'surat'=> $this->input->post('surat'),
-          'no_surat'=> $this->input->post('no_surat'),
-          'tanggal_surat'=> $this->input->post('tanggal_surat'),
-          'tembusan'=> $hobi_to_sql,
-          'id_pejabat'=> $id_pejabat,
-          'id_pengaju'=> $this->db->insert_id()
+          $this->db->insert('pengaju', $data1);
 
-        );
+          $id_pejabat = "P01";
 
-        $this->db->insert('penelitian', $data);
+          if(!empty($this->input->post('hobi'))){
+            $hobinya='';
+            $jml_data=count($hobi);
+            $hobi_dipilih= $this->input->post('hobi');
+
+            for($b=0;$b<count($this->input->post('hobi'));$b++){
+              $hobinya=$hobinya.$hobi_dipilih[$b].',';
+              $hobi_to_sql=substr(strrev($hobinya),1);
+            }
+          } else {
+            $hobi_to_sql = '';
+          }
+
+          $hari_ini = date("Y-m-d");
+
+          $data = array (
+            'waktu_pembuatan'=> $hari_ini,
+            'jenis_surat'=> $this->input->post('jenis_surat'),
+            'maksud'=> $this->input->post('maksud'),
+            'waktu_mulai'=> $this->input->post('mulai'),
+            'waktu_selesai'=> $this->input->post('selesai'),
+            'no_bkbpm'=> $this->input->post('no_bkbpm'),
+            'tanggal_bkbpm'=> $this->input->post('tanggal_bkbpm'),
+            'surat'=> $this->input->post('surat'),
+            'no_surat'=> $this->input->post('no_surat'),
+            'tanggal_surat'=> $this->input->post('tanggal_surat'),
+            'tembusan'=> $hobi_to_sql,
+            'id_pejabat'=> $id_pejabat,
+            'id_pengaju'=> $this->db->insert_id()
+
+          );
+
+          $this->db->insert('penelitian', $data);
+        }
       }
 
       function getLastInserted() {
