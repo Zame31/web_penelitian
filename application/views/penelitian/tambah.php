@@ -12,23 +12,27 @@ echo form_open('penelitian/tambah',$attributes);
   <div class="container">
     <div class="row form">
       <?php echo validation_errors(); ?>
+      <div class="input-field col s12">
+        <label class="active" for="dibuat">Waktu Dibuat Surat</label>
+        <input type="date" class="datepicker" id="dibuat" name="dibuat" value="<?php echo date("d-m-Y"); ?>">
+      </div>
       <div class="col s12">
         <div class="row">
           <div class="input-field col s6">
             <select name="jenis_surat">
-              <option value="" disabled selected>Surat Ini Dibuat Untuk :</option>
-              <option value="penelitian">Penelitian/Skripsi</option>
+              <option value="penelitian" selected>Penelitian/Skripsi</option>
               <option value="pkl">Praktek Kerja Lapangan(PKL) non Medis</option>
               <option value="pkl_medis">Praktek Kerja Lapangan(PKL) Medis</option>
             </select>
             <label>Dibuat Untuk :</label>
           </div>
           <div class="input-field col s6">
+              <label data-error="salah" data-success="benar">Dari Institusi</label>
             <input type="text" class="autocomplete" name="institusi" value="<?php echo set_value('institusi'); ?>">
-            <label data-error="salah" data-success="benar">Dari Institusi</label>
+
           </div>
         </div>
-  
+
         <div class="row">
           <div class="col s12">
             <p class=" sub-tit">Dengan ini menerangkan bahwa :</p>
@@ -150,8 +154,8 @@ echo form_open('penelitian/tambah',$attributes);
             <input type="checkbox" class="filled-in" id="teb9" name="hobi[]" value="8" />
             <label for="teb9">Kepala Sub Bagian Umum</label>
           </div>
-
         </div>
+
         <button class="btn waves-effect waves-light" type="submit" name="action">cetak
           <i class="material-icons right">send</i>
         </button>

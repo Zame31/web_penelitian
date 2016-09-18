@@ -4,17 +4,24 @@
 <main>
   <div class="title">
     Lihat Pengajuan Penelitian
+
   </div>
   <div class="content ">
+    <div class="row">
+      <div class="input-field col s6 custom-to">
+        <input type="text" id="searchbox">
+        <label>Cari</label>
+      </div>
+
+    </div>
     <table class="highlight striped" id="example">
       <thead>
         <tr>
           <th>No</th>
           <th width="130px">Waktu Pembuatan Surat</th>
-          <th width="160px">nama</th>
-          <th>Maksud</th>
-          <th  width="100px">Waktu Mulai Penelitian</th>
-          <th  width="100px">Waktu Selesai Penelitian</th>
+          <th width="160px">Nama</th>
+          <th>Institusi</th>
+          <th>Maksud Penelitian</th>
           <th width="120px">Control</th>
         </tr>
       </thead>
@@ -31,9 +38,10 @@
           <td align="center"><?php echo $i; ?></td>
           <td><?php echo tgl_indo($news_item->waktu_pembuatan); ?></td>
           <td><?php echo $news_item->nama; ?></td>
-          <td><?php echo $news_item->maksud; ?></td>
-          <td><?php echo tgl_indo($news_item->waktu_mulai); ?></td>
-          <td><?php echo tgl_indo($news_item->waktu_selesai); ?></td>
+
+            <td><?php echo $news_item->institusi; ?></td>
+            <td><?php echo $news_item->maksud; ?></td>
+
           <td>
             <a class="waves-effect waves-light btn green lighten-1 pad" target="_blank" href="<?php echo site_url('penelitian/cetak/'.$news_item->id_penelitian); ?>">
               <i class="material-icons">print</i>
@@ -41,13 +49,13 @@
             <a class="waves-effect waves-light btn blue lighten-1 pad" href="<?php echo site_url('penelitian/update/'.$news_item->id_penelitian); ?>">
               <i class="material-icons">update</i>
             </a>
-            <button data-target="modal_delete<?php echo $news_item->id_penelitian ?>" class="btn red lighten-2 modal-trigger waves-effect waves-light pad">
+            <a href="#modal<?php echo $news_item->id_penelitian ?>" class="btn red lighten-2 modal-trigger waves-effect waves-light pad">
               <i class="material-icons">delete</i>
-            </button>
+            </a>
           </td>
         </tr>
 
-        <div id="modal_delete<?php echo $news_item->id_penelitian ?>" class="delete modal">
+        <div id="modal<?php echo $news_item->id_penelitian ?>" class="delete modal">
           <div class="modal-content">
             <h6>anda yakin ingin menghapus data ini ?</h6>
           </div>
@@ -60,11 +68,6 @@
           <?php $i++;} } ?>
         </tbody>
     </table>
-
-    <script type="text/javascript">
-
-    </script>
-
   </div>
 
 

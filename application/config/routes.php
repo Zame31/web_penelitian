@@ -8,6 +8,9 @@ $route['penelitian/lihat'] = 'penelitian/view';
 //tambah data
 $route['penelitian/tambah'] = 'penelitian/tambah';
 
+//tambah data
+$route['penelitian/beranda'] = 'penelitian/beranda';
+
 //Laporan
 $route['penelitian/laporan'] = 'penelitian/laporan';
 $route['penelitian/cetak_laporan'] = 'penelitian/cetak_laporan';

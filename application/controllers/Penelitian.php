@@ -10,13 +10,24 @@ class Penelitian extends CI_Controller {
 		$this->load->helper('date_helper');
 		$this->load->library('session');
   }
+
+	public function beranda(){
+		$this->load->view('templates/header');
+		$this->load->view('templates/menu');
+		$data['penelitian'] = $this->penelitian_model->get_beranda();
+		$data['univ'] = $this->penelitian_model->get_univ();
+		$data['bulan_peng'] = $this->penelitian_model->get_peng_bulan();
+		$data['jum_hari_ini'] = $this->penelitian_model->get_jumlah_hari_ini();
+		$this->load->view('penelitian/beranda', $data);
+		$this->load->view('templates/footer');
+	}
 	public function validasi(){
 		$katakata = array('required' => 'Kolom <b> "%s" </b> Harus di isi. ');
 		$this->form_validation->set_rules('jenis_surat','Dibuat Untuk','required',$katakata);
 		$this->form_validation->set_rules('institusi','Institusi','required',$katakata);
 		$this->form_validation->set_rules('nama','Nama','required',$katakata);
 		$this->form_validation->set_rules('alamat','Alamat','required',$katakata);
-		$this->form_validation->set_rules('maksud','Maksud','required|is_unique[penelitian.maksud]',$katakata);
+		$this->form_validation->set_rules('maksud','Maksud','required',$katakata);
 		$this->form_validation->set_rules('mulai','Mulai','required',$katakata);
 		$this->form_validation->set_rules('selesai','Selesai','required',$katakata);
 		$this->form_validation->set_rules('no_bkbpm','Nomor BKBPM','required',$katakata);
@@ -77,17 +88,6 @@ class Penelitian extends CI_Controller {
 
 		$this->validasi();
 
-		// $nama = $this->input->post('nama');
-		// $alamat = $this->input->post('alamat');
-		// $this->db->select('id_pengaju');
-		// $this->db->from('pengaju');
-		// $this->db->where('nama', $nama);
-		// $this->db->where('alamat', $alamat);
-		// $query = $this->db->get();
-		// $data = $query->result_array();
-		//
-		// $num = $query->num_rows();
-
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
 
@@ -108,11 +108,7 @@ class Penelitian extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('nama','Nama','required|callback_check_duplicate_nama['.$post_nama .']');
-		$this->form_validation->set_rules('alamat','Alamat','required');
-
-		$this->form_validation->set_message('check_duplicate_nama', 'This nama is already exist. Please write a new nama.');
-
+		$this->validasi();
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
@@ -122,6 +118,7 @@ class Penelitian extends CI_Controller {
 			$this->load->view('penelitian/update', $data);
 		}else {
 			$this->penelitian_model->update_penelitian($id);
+			$this->session->set_flashdata('success_msg', 'Data Berhasil Di Perbaharui');
 			redirect('penelitian/lihat');
 		}
 

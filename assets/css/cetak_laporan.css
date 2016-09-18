@@ -12,6 +12,10 @@ table {
     border-collapse: collapse;
     width: 100%;
     font-size: 12px;
+		line-height: 20px;
+}
+tbody tr td {
+	vertical-align: text-top;
 }
 table tr td {
     font-weight: 300;

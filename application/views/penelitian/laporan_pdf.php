@@ -5,7 +5,17 @@
 <div class="head_laporan">
   rekapan surat izin penelitian
   <br>
-  <span><?php echo bulan($b1)." ".$t1; ?>  - <?php echo bulan($b2)." ".$t2; ?></span> 
+  <span>
+    <?php
+      if ($b1 == $b2 && $t1 == $t2) {
+        echo bulan($b1). " ".$t1;
+      } elseif ($t1 == $t2) {
+        echo bulan($b1)." - ".bulan($b2)." ".$t1;
+      }else {
+        echo bulan($b1)." ".$t1; ?>  - <?php echo bulan($b2)." ".$t2;
+      }
+      ?>
+  </span>
 </div>
 
 <table>
