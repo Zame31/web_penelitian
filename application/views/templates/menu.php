@@ -1,4 +1,9 @@
 <ul class="side-nav fixed">
+  <li><div class="userView">
+    <div class="background"></div>
+      <a href="#!user"><img class="responsive-img" src="<?php echo base_url() ?>assets/img/logo.png"></a>
+      <span class="title-web">web penelitian</span>
+    </div></li>
   <li class="no-padding">
     <ul class="collapsible collapsible-accordion">
       <li><a href="<?php echo site_url('penelitian/beranda'); ?>">Beranda</a></li>

@@ -22,7 +22,7 @@ $route['penelitian/update/(:any)'] = 'penelitian/update/$1';
 $route['penelitian/cetak/(:any)'] = 'penelitian/cetak/$1';
 
 
-$route['default_controller'] = 'penelitian/view';
+$route['default_controller'] = 'penelitian/beranda';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

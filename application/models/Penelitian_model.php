@@ -25,6 +25,12 @@
                                    WHERE DATE(waktu_pembuatan) = CURDATE()');
         return $query->num_rows();
       }
+      public function get_jumlah_minggu_ini(){
+        $query = $this->db->query('SELECT waktu_pembuatan
+                                   FROM penelitian
+                                   WHERE YEARWEEK(waktu_pembuatan)=YEARWEEK(NOW())');
+        return $query->num_rows();
+      }
       public function get_penelitian(){
         $this->db->select("*");
         $this->db->from("penelitian");

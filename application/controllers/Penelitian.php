@@ -18,6 +18,7 @@ class Penelitian extends CI_Controller {
 		$data['univ'] = $this->penelitian_model->get_univ();
 		$data['bulan_peng'] = $this->penelitian_model->get_peng_bulan();
 		$data['jum_hari_ini'] = $this->penelitian_model->get_jumlah_hari_ini();
+		$data['jum_minggu_ini'] = $this->penelitian_model->get_jumlah_minggu_ini();
 		$this->load->view('penelitian/beranda', $data);
 		$this->load->view('templates/footer');
 	}

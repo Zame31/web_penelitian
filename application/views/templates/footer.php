@@ -24,7 +24,10 @@
 
 	$(document).ready(function(){
 	 $('ul.tabs').tabs();
- });
+ 	});
+
+ $(".button-collapse").sideNav();
+
 
 	$(function() {
 	  $('input.autocomplete').autocomplete({

@@ -3,17 +3,29 @@
   <?php } ?>
 <main>
   <div class="title">
-    Lihat Pengajuan Penelitian
-
-  </div>
-  <div class="content ">
-    <div class="row">
-      <div class="input-field col s6 custom-to">
-        <input type="text" id="searchbox">
-        <label>Cari</label>
+    <span>Data Pengajuan Penelitian</span>
+      <div class="col s12 bred">
+        <a href="#!" class="breadcrumb">pengajuan Penelitian</a>
+        <a href="#!" class="breadcrumb">Data Pengajuan</a>
       </div>
 
+  </div>
+  <nav class="teal">
+    <div class="nav-wrapper ">
+      <form>
+        <div class="input-field">
+          <input id="searchbox" type="search" required>
+          <label for="searchbox" class="active"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
     </div>
+  </nav>
+
+  <div class="content ">
+
+
+    <div class="card-panel white lighten-2">
     <table class="highlight striped" id="example">
       <thead>
         <tr>
@@ -68,6 +80,7 @@
           <?php $i++;} } ?>
         </tbody>
     </table>
+  </div>
   </div>
 
 

@@ -27,21 +27,60 @@
 <main>
   <div class="content">
     <div class="row">
-      <div class="col s3">
-        <div class="card-panel green lighten-2">
+      <div class="col s2">
+        <a class="card" href="<?php echo site_url('penelitian/tambah'); ?>">
+        <div class="card-panel custom teal lighten-2 ">
           <span class="white-text">
-            <i class="material-icons">assignment_ind</i>
-            <h4>Total Semua Pengajuan</h4>
-            <h3><?php echo $penelitian; ?></h3>
+            <i class="material-icons cus-icon">person_add</i>
+            <h4>Buat Pengajuan Penelitian</h4>
+          </span>
+        </div>
+        </a>
+      </div>
+      <div class="col s2">
+        <a class="card" href="<?php echo site_url('penelitian/lihat'); ?>">
+        <div class="card-panel custom orange lighten-2">
+          <span class="white-text">
+            <i class="material-icons cus-icon">insert_drive_file</i>
+            <h4>Data Pengajuan Penelitian</h4>
+          </span>
+        </div>
+        </a>
+      </div>
+      <div class="col s2">
+        <a class="card" href="<?php echo site_url('penelitian/laporan'); ?>">
+        <div class="card-panel custom brown lighten-2">
+          <span class="white-text">
+            <i class="material-icons cus-icon">print</i>
+            <h4>Cetak Laporan Pengajuan</h4>
+          </span>
+        </div>
+        </a>
+      </div>
+      <div class="col s2">
+        <div class="card-panel custom red lighten-2">
+          <span class="white-text">
+            <i class="material-icons cus-icon">work</i>
+            <h4>Jumlah Pengajuan Hari Ini</h4>
+            <h3><?php echo $jum_hari_ini; ?></h3>
           </span>
         </div>
       </div>
-      <div class="col s3">
-        <div class="card-panel red lighten-2">
+      <div class="col s2">
+        <div class="card-panel custom blue lighten-2">
           <span class="white-text">
-            <i class="material-icons">assignment_ind</i>
-            <h4>Jumlah Pengajuan Hari Ini</h4>
-            <h3><?php echo $jum_hari_ini; ?></h3>
+            <i class="material-icons cus-icon">equalizer</i>
+            <h4>Jumlah Pengajuan Minggu Ini</h4>
+            <h3><?php echo $jum_minggu_ini; ?></h3>
+          </span>
+        </div>
+      </div>
+      <div class="col s2">
+        <div class="card-panel custom green lighten-2">
+          <span class="white-text">
+            <i class="material-icons cus-icon">assignment_ind</i>
+            <h4>Total Semua Pengajuan</h4>
+            <h3><?php echo $penelitian; ?></h3>
           </span>
         </div>
       </div>

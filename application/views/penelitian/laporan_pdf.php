@@ -7,13 +7,9 @@
   <br>
   <span>
     <?php
-      if ($b1 == $b2 && $t1 == $t2) {
-        echo bulan($b1). " ".$t1;
-      } elseif ($t1 == $t2) {
-        echo bulan($b1)." - ".bulan($b2)." ".$t1;
-      }else {
-        echo bulan($b1)." ".$t1; ?>  - <?php echo bulan($b2)." ".$t2;
-      }
+      if ($b1 == $b2 && $t1 == $t2) {echo bulan($b1). " ".$t1;}
+      elseif ($t1 == $t2) {echo bulan($b1)." - ".bulan($b2)." ".$t1;}
+      else {echo bulan($b1)." ".$t1; ?>  - <?php echo bulan($b2)." ".$t2;}
       ?>
   </span>
 </div>
@@ -27,15 +23,13 @@
     <th>Maksud</th>
     <th>Waktu Mulai</th>
     <th>Waktu Selesai</th>
-
   </tr>
 </thead>
 <tbody>
-    <?php
-      $i=1;
-      foreach ($penelitian as $news_item) {
-
-    ?>
+  <?php
+    $i=1;
+    foreach ($penelitian as $news_item) {
+  ?>
     <tr>
       <td><?php echo $i;?></td>
       <td><?php echo tgl_indo($news_item->waktu_pembuatan); ?></td>

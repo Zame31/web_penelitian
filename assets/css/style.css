@@ -5,37 +5,37 @@ body{
 	background:#fcfcfc;
 	font-family: 'Roboto', sans-serif;
 }
-main{
-	margin-left: 220px;
-}
-@media screen and (max-width: 480px) {
-	main{
-		margin-left: 0px;
-	}
-}
-@media screen and (max-width: 780px) {
-	main{
-		margin-left: 0px;
-	}
-}
+
 table {
 	font-size: 14px;
 }
 table tr td {
 	padding: 7px 5px;
 }
-
 /*CUSTOM CARD*/
-.card-panel {
-	text-align: center;
-	padding: 20px 20px 5px 20px;
+a.card:hover .card-panel.custom{
+	background: #696969  !important;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
 }
-.card-panel i.material-icons {
-	font-size: 70px;
+a.card .card-panel.custom {
+	padding: 30px 10px 5px 10px;
+}
+.card-panel.custom {
+	text-align: center;
+	padding: 20px 10px 5px 10px;
+	height: 170px;
+}
+.card-panel i.cus-icon {
+	font-size: 50px;
 }
 .card-panel h4 {
 	font-size: 14px;
 	margin: 0;
+	line-height: 1.5;
 }
 .card-panel h3 {
 	font-size: 24px;
@@ -49,26 +49,46 @@ table tr td {
 }
 
 /*main*/
+header, main, footer {
+  padding-left: 220px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+.title-web {
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	text-transform: capitalize;
+	font-weight: 600;
+	color: #6f6f6f;
+	margin-top: -20px;
+}
 .title {
 	background: #26a69a;
-	font-size: 20px;
-	font-weight: 400;
 	color: #fff;
-	padding: 20px 40px;
+	padding: 30px 20px 40px;
+}
+.title span {
+	display: block;
+	font-size: 20px;
+	font-weight: 600;
+	text-transform: uppercase;
 }
 .form {
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
 .content {
-	padding: 40px 20px;
+	padding: 20px 20px;
 }
 .sub-tit {
-    padding: 10px 20px;
-    background: #E57373;
+    padding: 15px 20px;
     color: #fff;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 16px;
 }
 
 /*datatables*/
@@ -89,6 +109,30 @@ table tr td {
 }
 
 /*custom material*/
+.card-panel.cus-tambah {
+	padding: 0;
+}
+.bred {
+	margin-top: 20px;
+}
+.breadcrumb:before {
+	font-size: 16px;
+}
+.breadcrumb {
+    font-size: 12px;
+}
+div.dataTables_wrapper div.dataTables_info {
+  font-size: 12px;
+}
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.side-nav .userView {
+    padding: 30px 50px 10px;
+}
+
 [type="checkbox"]+label {
 	color: #3a3a3a;
 	margin-bottom: 10px;
@@ -106,7 +150,7 @@ table.highlight>tbody>tr:hover {
 }
 .side-nav .collapsible-body li a,
 .side-nav.fixed .collapsible-body li a {
-	font-weight: 400;
+	font-weight: 300;
 }
 .btn.pad {
 	padding: 0 10px;
