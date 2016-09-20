@@ -67,6 +67,25 @@
 	setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 </script>
 
+<script type="text/javascript">
+	function validate(){
+	  var error="";
+
+	  for (var i = 1; i <= 3; i++) {
+	    var name = document.getElementById( "val"+i );
+	    if( name.value == "" )
+	    {
+	      Materialize.toast('Kolom Harus Di isi', 4000);
+	      document.getElementById('val'+i).focus();
+	      return false;
+	    }
+	    else {
+	      setTimeout('location.reload()', 500);
+	    }
+	  }
+	}
+</script>
+
 <!-- DATATABLE -->
 <script type="text/javascript">
 $(document).ready(function() {

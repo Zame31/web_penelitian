@@ -1,8 +1,7 @@
-<?php if ($this->session->flashdata('success_msg')) { ?>
-      <div id="snackbar"> <?php echo $this->session->flashdata('success_msg') ?> </div>
-  <?php } ?>
+
+
 <?php
-$attributes = array('target' => '_blank','onsubmit' => "setTimeout('location.reload()', 500);");
+$attributes = array('target' => '_blank','onsubmit' => "return validate();");
 echo form_open('penelitian/tambah',$attributes);
 ?>
 <main>
@@ -15,7 +14,6 @@ echo form_open('penelitian/tambah',$attributes);
   </div>
   <div class="content">
     <div class="row form">
-      <?php echo validation_errors(); ?>
 
       <!-- dengan ini menerangkan bahwa -->
       <div class="col s12">
@@ -37,7 +35,7 @@ echo form_open('penelitian/tambah',$attributes);
               </div>
               <div class="input-field col s6">
                   <label  >Dari Institusi :</label>
-                <input type="text" class="autocomplete" name="institusi" value="<?php echo set_value('institusi'); ?>">
+                <input id="val1" type="text" class="autocomplete" name="institusi" value="<?php echo set_value('institusi'); ?>">
               </div>
             </div>
           </div>
@@ -51,25 +49,25 @@ echo form_open('penelitian/tambah',$attributes);
             <div class="content">
               <div class="row">
                 <div class="input-field col s12">
-                  <input type="text"  name="nama" value="<?php echo set_value('nama'); ?>">
+                  <input id="val2" type="text" name="nama" value="<?php echo set_value('nama'); ?>">
                   <label>Nama Lengkap</label>
                 </div>
                 <div class="input-field col s12">
-                  <textarea name="alamat" id="textarea1" class="materialize-textarea"><?php echo set_value('alamat'); ?></textarea>
-                  <label   for="textarea1">Alamat</label>
+                  <textarea name="alamat" id="val3" class="materialize-textarea"><?php echo set_value('alamat'); ?></textarea>
+                  <label for="val3">Alamat</label>
                 </div>
                 <div class="input-field col s12">
-                  <textarea name="maksud" id="textarea2" class="materialize-textarea"><?php echo set_value('maksud'); ?></textarea>
-                  <label   for="textarea2">Maksud</label>
+                  <textarea name="maksud" id="val4" class="materialize-textarea"><?php echo set_value('maksud'); ?></textarea>
+                  <label   for="val4">Maksud</label>
                 </div>
                 <div class="row">
                   <div class="input-field col s6">
-                    <label class="active" for="mulai">Waktu Mulai Penelitian</label>
-                    <input type="date" class="datepicker" id="mulai" name="mulai" value="<?php echo set_value('mulai'); ?>">
+                    <label class="active" for="val5">Waktu Mulai Penelitian</label>
+                    <input type="date" class="datepicker" id="val5" name="mulai" value="<?php echo set_value('mulai'); ?>">
                   </div>
                   <div class="input-field col s6">
-                    <label class="active" for="selesai">Waktu Selesai Penelitian</label>
-                    <input type="date" class="datepicker" id="selesai" name="selesai" value="<?php echo set_value('selesai'); ?>">
+                    <label class="active" for="val6">Waktu Selesai Penelitian</label>
+                    <input type="date" class="datepicker" id="val6" name="selesai" value="<?php echo set_value('selesai'); ?>">
                   </div>
                 </div>
               </div>
@@ -90,12 +88,12 @@ echo form_open('penelitian/tambah',$attributes);
                 </div>
                 <div class="row">
                   <div class="input-field col s6">
-                    <input type="text"  name="no_bkbpm" value="<?php echo set_value('no_bkbpm'); ?>">
-                    <label  >Nomor BKBPM</label>
+                    <input id="val7" type="text"  name="no_bkbpm" value="<?php echo set_value('no_bkbpm'); ?>">
+                    <label>Nomor BKBPM</label>
                   </div>
                   <div class="input-field col s6">
                     <label class="active" for="tgl_bkbpm">Tanggal BKBPM</label>
-                    <input type="date" class="datepicker" id="tgl_bkbpm" name="tanggal_bkbpm" value="<?php echo set_value('tanggal_bkbpm'); ?>">
+                    <input id="val8" type="date" class="datepicker" id="tgl_bkbpm" name="tanggal_bkbpm" value="<?php echo set_value('tanggal_bkbpm'); ?>">
                   </div>
                 </div>
                 <div class="row">
@@ -105,18 +103,18 @@ echo form_open('penelitian/tambah',$attributes);
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input type="text"  name="surat" value="<?php echo set_value('surat'); ?>">
+                    <input id="val9" type="text"  name="surat" value="<?php echo set_value('surat'); ?>">
                     <label  >Surat Permohonan Dari</label>
                   </div>
                 </div>
                 <div class="row">
                   <div class="input-field col s6">
-                    <input type="text"  name="no_surat" value="<?php echo set_value('no_surat'); ?>">
+                    <input id="val10" type="text"  name="no_surat" value="<?php echo set_value('no_surat'); ?>">
                     <label  >Nomor Surat</label>
                   </div>
                   <div class="input-field col s6">
-                    <label class="active" for="tgl_surat">Tanggal Surat</label>
-                    <input type="date" class="datepicker" id="tgl_surat" name="tanggal_surat" value="<?php echo set_value('tanggal_surat'); ?>">
+                    <label class="active" for="val11">Tanggal Surat</label>
+                    <input type="date" class="datepicker" id="val11" name="tanggal_surat" value="<?php echo set_value('tanggal_surat'); ?>">
                   </div>
                 </div>
               </div>
