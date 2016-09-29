@@ -5,12 +5,60 @@ body{
 	background:#fcfcfc;
 	font-family: 'Roboto', sans-serif;
 }
-
 table {
 	font-size: 14px;
 }
 table tr td {
 	padding: 7px 5px;
+}
+/*MENU*/
+.side-nav li>a.icon-menu>i.material-icons {
+	margin: 0 10px 0 0;
+}
+.side-nav a {
+	font-size: 13px;
+}
+.side-nav .userView.user {
+	padding: 0;
+}
+.side-nav .userView.user .nama {
+	color: white;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+.side-nav .userView.user .nama i.material-icons {
+	vertical-align: middle;
+margin-right: 10px;
+}
+/*LOGIN*/
+.title-login {
+	text-transform: capitalize;
+	font-size: 24px;
+	color: #fff;
+	text-align: center;
+	padding: 30px;
+	margin-bottom: 70px;
+	font-weight: 300;
+}
+.title-login span {
+	display: block;
+	font-size: 12px;
+	font-weight: 600;
+	margin-top: 5px;
+}
+.but-login {
+	margin-top: 10px;
+}
+.card-login {
+	color: #a7a7a7;
+font-size: 16px;
+font-weight: 600;
+padding: 20px;
+border-bottom: 1px solid whitesmoke;
+}
+.content-login{
+	padding: 10px 30px;
 }
 /*CUSTOM CARD*/
 a.card:hover .card-panel.custom{
@@ -58,25 +106,44 @@ header, main, footer {
     padding-left: 0;
   }
 }
+.main-seker {
+	padding: 30px;
+}
+.jab {
+	padding: 0;
+}
 .title-web {
+	display: block;
+	text-align: center;
+	font-size: 13px;
+	text-transform: capitalize;
+	font-weight: 500;
+	color: #26a69a;
+	line-height: 20px;
+}
+.sub-title-web {
 	display: block;
 	text-align: center;
 	font-size: 14px;
 	text-transform: capitalize;
-	font-weight: 600;
-	color: #6f6f6f;
-	margin-top: -20px;
+	font-weight: 300;
+	margin-top: -7px;
+	color: #333333;
+	line-height: 20px;
+}
+.side-nav.fixed a.logo {
+  padding: 0 66px;
 }
 .title {
 	background: #26a69a;
 	color: #fff;
-	padding: 30px 20px 40px;
+	padding: 30px 40px 40px;
 }
 .title span {
 	display: block;
 	font-size: 20px;
-	font-weight: 600;
-	text-transform: uppercase;
+	font-weight: 500;
+	text-transform: capitalize;
 }
 .form {
 	margin-top: 30px;
@@ -113,7 +180,7 @@ header, main, footer {
 	padding: 0;
 }
 .bred {
-	margin-top: 20px;
+	margin-top: 10px;
 }
 .breadcrumb:before {
 	font-size: 16px;
@@ -130,7 +197,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .side-nav .userView {
-    padding: 30px 50px 10px;
+    padding: 30px 10px 10px;
 }
 
 [type="checkbox"]+label {
@@ -150,7 +217,7 @@ table.highlight>tbody>tr:hover {
 }
 .side-nav .collapsible-body li a,
 .side-nav.fixed .collapsible-body li a {
-	font-weight: 300;
+	font-weight: 400;
 }
 .btn.pad {
 	padding: 0 10px;

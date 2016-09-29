@@ -311,10 +311,10 @@ $config['cache_query_string'] = FALSE;
 | If you use the Encryption class, you must set an encryption key.
 | See the user guide for more info.
 |
-| https://codeigniter.com/user_guide/libraries/encryption.html
+| https://codeigniter.com/user_guide/libraries/encryption.html`
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'dOtVmN78PzAclIk3K6jK06ReotJ96a1l';
 
 /*
 |--------------------------------------------------------------------------

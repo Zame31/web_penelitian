@@ -13,9 +13,9 @@ class m_pdf_lanscape {
 
         if ($params == NULL)
         {
-            $param = '"en-GB-x","A4","","",40,40,40,10,6,3';
+            $param = '"en-GB-x","A4","","",10,10,10,10,6,3';
         }
 
-        return new mPDF('utf-8', array(330,216),15,15,15,15);
+        return new mPDF('utf-8', array(300,210),5,5,10,10);
     }
 }

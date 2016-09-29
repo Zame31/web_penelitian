@@ -1,11 +1,11 @@
 <?php
   $attributes = array('target' => '_blank','onsubmit' => "return validate();");
-echo form_open('penelitian/laporan',$attributes); ?>
+  echo form_open('pkl/laporan',$attributes); ?>
 <main>
   <div class="title">
     <span>sistem informasi izin penelitian (SIIP)</span>
       <div class="col s12 bred">
-        <a href="#!" class="breadcrumb">Pengajuan Izin Penelitian</a>
+        <a href="#!" class="breadcrumb">Pengajuan Kerja Praktek</a>
         <a href="#!" class="breadcrumb">Cetak Laporan</a>
       </div>
   </div>

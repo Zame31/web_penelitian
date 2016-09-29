@@ -2,14 +2,12 @@
       <div id="snackbar"> <?php echo $this->session->flashdata('success_msg') ?> </div>
   <?php } ?>
 <main>
-
   <div class="title">
     <span>sistem informasi izin penelitian (SIIP)</span>
       <div class="col s12 bred">
-        <a href="#!" class="breadcrumb">pengajuan Penelitian</a>
-        <a href="#!" class="breadcrumb">Data Pengajuan</a>
+        <a href="#!" class="breadcrumb">pengajuan Kerja Praktek</a>
+        <a href="#!" class="breadcrumb">Data Kerja Praktek</a>
       </div>
-
   </div>
   <nav class="teal">
     <div class="nav-wrapper ">
@@ -24,8 +22,6 @@
   </nav>
 
   <div class="content ">
-
-
     <div class="card-panel white lighten-2">
     <table class="highlight striped" id="example">
       <thead>
@@ -34,7 +30,8 @@
           <th width="130px">Waktu Pembuatan Surat</th>
           <th width="160px">Nama</th>
           <th>Institusi</th>
-          <th>Maksud Penelitian</th>
+          <th>Waktu Mulai</th>
+          <th>Waktu Selesai</th>
           <th width="120px">Control</th>
         </tr>
       </thead>
@@ -51,9 +48,10 @@
           <td align="center"><?php echo $i; ?></td>
           <td><?php echo tgl_indo($news_item->waktu_pembuatan); ?></td>
           <td><?php echo $news_item->nama; ?></td>
+          <td><?php echo $news_item->institusi; ?></td>
+          <td><?php echo tgl_indo($news_item->waktu_mulai); ?></td>
+          <td><?php echo tgl_indo($news_item->waktu_selesai); ?></td>
 
-            <td><?php echo $news_item->institusi; ?></td>
-            <td><?php echo $news_item->maksud; ?></td>
 
           <td>
             <a class="waves-effect waves-light btn green lighten-1 pad" target="_blank" href="<?php echo site_url('penelitian/cetak/'.$news_item->id_penelitian); ?>">

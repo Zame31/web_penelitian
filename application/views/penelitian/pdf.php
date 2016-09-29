@@ -131,7 +131,10 @@
                    'Kepala Bina Program Kesehatan',
                    'Kepala Sub. Bagian Keuangan',
                    'Kepala Sub. Bagian Kepegawaian',
-                   'Kepala Sub. Bagian Umum');
+                   'Kepala Sub. Bagian Umum',
+                   'kepala UPT Laboratorium kesehatan',
+                   'kepala UPT yankes mobilitas'
+                  );
 
        if(!empty($news_item['tembusan'])){
 

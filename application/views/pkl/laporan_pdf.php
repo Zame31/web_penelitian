@@ -13,7 +13,7 @@
   </div>
 </div>
 <div class="head_laporan sub">
-  rekapan surat izin penelitian <br>
+  rekapan surat izin Kerja Praktek <br>
   <span>
     Bulan
     <?php

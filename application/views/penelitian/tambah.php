@@ -1,12 +1,10 @@
-
-
 <?php
 $attributes = array('target' => '_blank','onsubmit' => "return validate();");
 echo form_open('penelitian/tambah',$attributes);
 ?>
 <main>
   <div class="title">
-    <span>Buat Pengajuan Penelitian</span>
+    <span>sistem informasi izin penelitian (SIIP)</span>
       <div class="col s12 bred">
         <a href="#!" class="breadcrumb">pengajuan Penelitian</a>
         <a href="#!" class="breadcrumb">Buat Pengajuan</a>
@@ -58,7 +56,8 @@ echo form_open('penelitian/tambah',$attributes);
                 </div>
                 <div class="input-field col s12">
                   <textarea name="maksud" id="val4" class="materialize-textarea"><?php echo set_value('maksud'); ?></textarea>
-                  <label   for="val4">Maksud</label>
+                  <label for="val4">Maksud</label>
+                  <?php echo validation_errors(); ?>
                 </div>
                 <div class="row">
                   <div class="input-field col s6">
@@ -164,6 +163,14 @@ echo form_open('penelitian/tambah',$attributes);
                   <div class="col s6">
                     <input type="checkbox" class="filled-in" id="teb9" name="hobi[]" value="8" />
                     <label for="teb9">Kepala Sub Bagian Umum</label>
+                  </div>
+                  <div class="col s6">
+                    <input type="checkbox" class="filled-in" id="teb10" name="hobi[]" value="9" />
+                    <label for="teb10">kepala UPT Laboratorium Kesehatan</label>
+                  </div>
+                  <div class="col s6">
+                    <input type="checkbox" class="filled-in" id="teb11" name="hobi[]" value="10" />
+                    <label for="teb11">kepala UPT Yankes Mobilitas</label>
                   </div>
                 </div>
               </div>

@@ -4,12 +4,34 @@
       public function __construct(){
         $this->load->database();
       }
+      public function get_mail($id){
+        $this->db->select("mail");
+        $this->db->from("pengaju");
+        $this->db->join("penelitian", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
+        $this->db->where('id_penelitian', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+      }
+
+      public function update_mail($id){
+        $data = array (
+          //nama table database => nama dari form
+          'status_mail'=> 'sudah'
+        );
+        $this->db->where('id_penelitian', $id);
+        $this->db->update('penelitian', $data);
+      }
+
+
 
       public function get_beranda(){
         $query = $this->db->query('SELECT * FROM penelitian');
         return $query->num_rows();
       }
-
+      public function get_pejabat(){
+        $query = $this->db->query('SELECT * FROM pejabat');
+        return $query->result_array();
+      }
       public function get_univ(){
         $query = $this->db->query('SELECT DISTINCT institusi,COUNT(institusi) as Jumlah FROM pengaju GROUP BY institusi ORDER BY Jumlah DESC LIMIT 5');
         return $query->result_array();
@@ -35,8 +57,23 @@
         $this->db->select("*");
         $this->db->from("penelitian");
         $this->db->join("pengaju", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
-
+        $this->db->where("jenis_surat", "penelitian");
         $this->db->order_by("waktu_pembuatan","asc");
+        $query = $this->db->get();
+            if ($query->num_rows() >0){
+                foreach ($query->result() as $data) {
+                    # code...
+                    $penelitian[] = $data;
+                }
+            return $penelitian; //hasil dari semua proses ada dimari
+            }
+      }
+      public function get_mail_penelitian(){
+        $this->db->select("*");
+        $this->db->from("penelitian");
+        $this->db->join("pengaju", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
+        $this->db->where("jenis_surat", "penelitian");
+        $this->db->order_by("status_mail","asc");
         $query = $this->db->get();
             if ($query->num_rows() >0){
                 foreach ($query->result() as $data) {
@@ -62,6 +99,7 @@
         $this->db->where('month(waktu_pembuatan) <=', $b2);
         $this->db->where('year(waktu_pembuatan) >=', $t1);
         $this->db->where('year(waktu_pembuatan) <=', $t2);
+        $this->db->where('jenis_surat', 'penelitian');
         $this->db->order_by("waktu_pembuatan","asc");
         $query = $this->db->get();
 
@@ -219,7 +257,6 @@
           $hobi_to_sql = '';
         }
 
-
         $data = array (
           'waktu_pembuatan'=> date("Y-m-d", strtotime($this->input->post('dibuat'))),
           'jenis_surat'=> $this->input->post('jenis_surat'),
@@ -238,6 +275,24 @@
         );
         $this->db->where('id_penelitian', $id);
         $this->db->update('penelitian', $data);
+
+      }
+
+      public function update_sekertaris(){
+        $this->load->helper('url');
+
+        $id_pejabat = "P01";
+        $jabatan = "Sekretaris Dinas Kesehatan Kota Bandung";
+
+        $data1 = array (
+          //nama table database => nama dari form
+          'nama_pejabat'=> $this->input->post('nama_pejabat'),
+          'jabatan'=> $jabatan,
+          'golongan'=> $this->input->post('golongan'),
+          'nip'=> $this->input->post('nip')
+        );
+        $this->db->where('id_pejabat', $id_pejabat);
+        $this->db->update('pejabat', $data1);
 
       }
     }
