@@ -4,6 +4,7 @@
       public function __construct(){
         $this->load->database();
       }
+
       public function get_mail($id){
         $this->db->select("mail");
         $this->db->from("pengaju");
@@ -12,47 +13,14 @@
         $query = $this->db->get();
         return $query->row_array();
       }
-
-      public function update_mail($id){
-        $data = array (
-          //nama table database => nama dari form
-          'status_mail'=> 'sudah'
-        );
+      public function get_jenis_surat($id){
+        $this->db->select("jenis_surat");
+        $this->db->from("penelitian");
         $this->db->where('id_penelitian', $id);
-        $this->db->update('penelitian', $data);
+        $query = $this->db->get();
+        return $query->row_array();
       }
 
-
-
-      public function get_beranda(){
-        $query = $this->db->query('SELECT * FROM penelitian');
-        return $query->num_rows();
-      }
-      public function get_pejabat(){
-        $query = $this->db->query('SELECT * FROM pejabat');
-        return $query->result_array();
-      }
-      public function get_univ(){
-        $query = $this->db->query('SELECT DISTINCT institusi,COUNT(institusi) as Jumlah FROM pengaju GROUP BY institusi ORDER BY Jumlah DESC LIMIT 5');
-        return $query->result_array();
-      }
-
-      public function get_peng_bulan(){
-        $query = $this->db->query('SELECT MONTH(waktu_pembuatan) as bulan ,COUNT(waktu_pembuatan)as jumlah FROM `penelitian` GROUP BY MONTH(waktu_pembuatan) ');
-        return $query->result_array();
-      }
-      public function get_jumlah_hari_ini(){
-        $query = $this->db->query('SELECT id_penelitian
-                                   FROM penelitian
-                                   WHERE DATE(waktu_pembuatan) = CURDATE()');
-        return $query->num_rows();
-      }
-      public function get_jumlah_minggu_ini(){
-        $query = $this->db->query('SELECT waktu_pembuatan
-                                   FROM penelitian
-                                   WHERE YEARWEEK(waktu_pembuatan)=YEARWEEK(NOW())');
-        return $query->num_rows();
-      }
       public function get_penelitian(){
         $this->db->select("*");
         $this->db->from("penelitian");
@@ -60,32 +28,21 @@
         $this->db->where("jenis_surat", "penelitian");
         $this->db->order_by("waktu_pembuatan","asc");
         $query = $this->db->get();
-            if ($query->num_rows() >0){
-                foreach ($query->result() as $data) {
-                    # code...
-                    $penelitian[] = $data;
-                }
-            return $penelitian; //hasil dari semua proses ada dimari
-            }
+        return $query->result();
       }
+
       public function get_mail_penelitian(){
         $this->db->select("*");
         $this->db->from("penelitian");
         $this->db->join("pengaju", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
         $this->db->where("jenis_surat", "penelitian");
         $this->db->order_by("status_mail","asc");
+        $this->db->order_by("waktu_pembuatan","desc");
         $query = $this->db->get();
-            if ($query->num_rows() >0){
-                foreach ($query->result() as $data) {
-                    # code...
-                    $penelitian[] = $data;
-                }
-            return $penelitian; //hasil dari semua proses ada dimari
-            }
+        return $query->result();
       }
 
       public function get_laporan(){
-
         $b1 = $this->input->post('b1');
         $b2 = $this->input->post('b2');
         $t1 = $this->input->post('t1');
@@ -94,7 +51,6 @@
         $this->db->select("*");
         $this->db->from("penelitian");
         $this->db->join("pengaju", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
-
         $this->db->where('month(waktu_pembuatan) >=', $b1);
         $this->db->where('month(waktu_pembuatan) <=', $b2);
         $this->db->where('year(waktu_pembuatan) >=', $t1);
@@ -102,14 +58,7 @@
         $this->db->where('jenis_surat', 'penelitian');
         $this->db->order_by("waktu_pembuatan","asc");
         $query = $this->db->get();
-
-        if ($query->num_rows() >0){
-            foreach ($query->result() as $data) {
-              $penelitian[] = $data;
-            }
-        return $penelitian;
-        }
-
+        return $query->result();
       }
 
       public function get_penelitian_id($id = FALSE){
@@ -122,9 +71,16 @@
         return $query->row_array();
       }
 
-      public function set_penelitian(){
-        $this->load->helper('url');
+      public function update_mail($id){
+        $data = array (
+          'status_mail'=> 'sudah'
+        );
+        $this->db->where('id_penelitian', $id);
+        $this->db->update('penelitian', $data);
+      }
 
+      public function set_penelitian(){
+      //Cek Apakah Pengaju Sudah Ada
         $nama = $this->input->post('nama');
         $alamat = $this->input->post('alamat');
         $this->db->select('id_pengaju');
@@ -135,93 +91,53 @@
         $data_z = $query->result_array();
         $num = $query->num_rows();
 
+      //cekbox
+        if(!empty($this->input->post('hobi'))){
+          $hobinya='';
+          $hobi_dipilih= $this->input->post('hobi');
+
+          for($b=0;$b<count($this->input->post('hobi'));$b++){
+            $hobinya=$hobinya.$hobi_dipilih[$b].',';
+            $hobi_to_sql=substr(strrev($hobinya),1);
+          }
+        } else {
+          $hobi_to_sql = '';
+        }
+
+        $data_pengaju = array (
+          //nama table database => nama dari form
+          'nama'      => $this->input->post('nama'),
+          'alamat'    => $this->input->post('alamat'),
+          'institusi' => $this->input->post('institusi'),
+          'mail'      => $this->input->post('mail')
+        );
+
+        $data_penelitian = array (
+          'waktu_pembuatan' => date("Y-m-d", strtotime($this->input->post('dibuat'))),
+          'jenis_surat'     => $this->input->post('jenis_surat'),
+          'maksud'          => $this->input->post('maksud'),
+          'waktu_mulai'     => date("Y-m-d", strtotime($this->input->post('mulai'))),
+          'waktu_selesai'   => date("Y-m-d", strtotime($this->input->post('selesai'))),
+          'no_bkbpm'        => $this->input->post('no_bkbpm'),
+          'tanggal_bkbpm'   => date("Y-m-d", strtotime($this->input->post('tanggal_bkbpm'))),
+          'surat'           => $this->input->post('surat'),
+          'no_surat'        => $this->input->post('no_surat'),
+          'tanggal_surat'   => date("Y-m-d", strtotime($this->input->post('tanggal_surat'))),
+          'tembusan'        => $hobi_to_sql,
+          'id_pejabat'      => "P01"
+        );
+
         // jika data pengaju ada
         if ($num > 0) {
-
-          $id_pejabat = "P01";
-
-          if(!empty($this->input->post('hobi'))){
-            $hobinya='';
-            $jml_data=count($hobi);
-            $hobi_dipilih= $this->input->post('hobi');
-
-            for($b=0;$b<count($this->input->post('hobi'));$b++){
-              $hobinya=$hobinya.$hobi_dipilih[$b].',';
-              $hobi_to_sql=substr(strrev($hobinya),1);
-            }
-          } else {
-            $hobi_to_sql = '';
-          }
-
-          $data = array (
-            'waktu_pembuatan'=> date("Y-m-d", strtotime($this->input->post('dibuat'))),
-            'jenis_surat'=> $this->input->post('jenis_surat'),
-            'maksud'=> $this->input->post('maksud'),
-            'waktu_mulai'=> date("Y-m-d", strtotime($this->input->post('mulai'))),
-            'waktu_selesai'=> date("Y-m-d", strtotime($this->input->post('selesai'))),
-            'no_bkbpm'=> $this->input->post('no_bkbpm'),
-            'tanggal_bkbpm'=> date("Y-m-d", strtotime($this->input->post('tanggal_bkbpm'))),
-            'surat'=> $this->input->post('surat'),
-            'no_surat'=> $this->input->post('no_surat'),
-            'tanggal_surat'=> date("Y-m-d", strtotime($this->input->post('tanggal_surat'))),
-            'tembusan'=> $hobi_to_sql,
-            'id_pejabat'=> $id_pejabat,
-            'id_pengaju'=> $data_z[0]['id_pengaju']
-          );
-          $this->db->insert('penelitian', $data);
+          $data_penelitian['id_pengaju'] = $data_z[0]['id_pengaju'];
+          $this->db->insert('penelitian', $data_penelitian);
         }
-
         // jika data pengaju tidak ada
         else {
-          $data1 = array (
-            //nama table database => nama dari form
-            'nama'=> $this->input->post('nama'),
-            'alamat'=> $this->input->post('alamat'),
-            'institusi'=> $this->input->post('institusi')
-          );
-
-          $this->db->insert('pengaju', $data1);
-
-          $id_pejabat = "P01";
-
-
-
-          if(!empty($this->input->post('hobi'))){
-            $hobinya='';
-            $jml_data=count($hobi);
-            $hobi_dipilih= $this->input->post('hobi');
-
-            for($b=0;$b<count($this->input->post('hobi'));$b++){
-              $hobinya=$hobinya.$hobi_dipilih[$b].',';
-              $hobi_to_sql=substr(strrev($hobinya),1);
-            }
-          } else {
-            $hobi_to_sql = '';
-          }
-
-          $data = array (
-            'waktu_pembuatan'=> date("Y-m-d", strtotime($this->input->post('dibuat'))),
-            'jenis_surat'=> $this->input->post('jenis_surat'),
-            'maksud'=> $this->input->post('maksud'),
-            'waktu_mulai'=> date("Y-m-d", strtotime($this->input->post('mulai'))),
-            'waktu_selesai'=> date("Y-m-d", strtotime($this->input->post('selesai'))),
-            'no_bkbpm'=> $this->input->post('no_bkbpm'),
-            'tanggal_bkbpm'=> date("Y-m-d", strtotime($this->input->post('tanggal_bkbpm'))),
-            'surat'=> $this->input->post('surat'),
-            'no_surat'=> $this->input->post('no_surat'),
-            'tanggal_surat'=> date("Y-m-d", strtotime($this->input->post('tanggal_surat'))),
-            'tembusan'=> $hobi_to_sql,
-            'id_pejabat'=> $id_pejabat,
-            'id_pengaju'=> $this->db->insert_id()
-
-          );
-
-          $this->db->insert('penelitian', $data);
+          $this->db->insert('pengaju', $data_pengaju);
+          $data_penelitian['id_pengaju'] = $this->db->insert_id();
+          $this->db->insert('penelitian', $data_penelitian);
         }
-      }
-
-      function getLastInserted() {
-        return $this->db->insert_id();
       }
 
       public function delete_penelitian($id_penelitian){
@@ -234,10 +150,10 @@
         $id_pengaju = $this->input->post('id_pengaju');
 
         $data1 = array (
-          //nama table database => nama dari form
-          'nama'=> $this->input->post('nama'),
-          'alamat'=> $this->input->post('alamat'),
-          'institusi'=> $this->input->post('institusi')
+          'nama'      => $this->input->post('nama'),
+          'alamat'    => $this->input->post('alamat'),
+          'institusi' => $this->input->post('institusi'),
+          'mail'      => $this->input->post('mail')
         );
         $this->db->where('id_pengaju', $id_pengaju);
         $this->db->update('pengaju', $data1);
@@ -258,19 +174,19 @@
         }
 
         $data = array (
-          'waktu_pembuatan'=> date("Y-m-d", strtotime($this->input->post('dibuat'))),
-          'jenis_surat'=> $this->input->post('jenis_surat'),
-          'maksud'=> $this->input->post('maksud'),
-          'waktu_mulai'=> date("Y-m-d", strtotime($this->input->post('mulai'))),
-          'waktu_selesai'=> date("Y-m-d", strtotime($this->input->post('selesai'))),
-          'no_bkbpm'=> $this->input->post('no_bkbpm'),
-          'tanggal_bkbpm'=> date("Y-m-d", strtotime($this->input->post('tanggal_bkbpm'))),
-          'surat'=> $this->input->post('surat'),
-          'no_surat'=> $this->input->post('no_surat'),
-          'tanggal_surat'=> date("Y-m-d", strtotime($this->input->post('tanggal_surat'))),
-          'tembusan'=> $hobi_to_sql,
-          'id_pejabat'=> $id_pejabat,
-          'id_pengaju'=> $id_pengaju
+          'waktu_pembuatan' => date("Y-m-d", strtotime($this->input->post('dibuat'))),
+          'jenis_surat'     => $this->input->post('jenis_surat'),
+          'maksud'          => $this->input->post('maksud'),
+          'waktu_mulai'     => date("Y-m-d", strtotime($this->input->post('mulai'))),
+          'waktu_selesai'   => date("Y-m-d", strtotime($this->input->post('selesai'))),
+          'no_bkbpm'        => $this->input->post('no_bkbpm'),
+          'tanggal_bkbpm'   => date("Y-m-d", strtotime($this->input->post('tanggal_bkbpm'))),
+          'surat'           => $this->input->post('surat'),
+          'no_surat'        => $this->input->post('no_surat'),
+          'tanggal_surat'   => date("Y-m-d", strtotime($this->input->post('tanggal_surat'))),
+          'tembusan'        => $hobi_to_sql,
+          'id_pejabat'      => $id_pejabat,
+          'id_pengaju'      => $id_pengaju
 
         );
         $this->db->where('id_penelitian', $id);
@@ -285,17 +201,91 @@
         $jabatan = "Sekretaris Dinas Kesehatan Kota Bandung";
 
         $data1 = array (
-          //nama table database => nama dari form
-          'nama_pejabat'=> $this->input->post('nama_pejabat'),
-          'jabatan'=> $jabatan,
-          'golongan'=> $this->input->post('golongan'),
-          'nip'=> $this->input->post('nip')
+          'nama_pejabat'  => $this->input->post('nama_pejabat'),
+          'jabatan'       => $jabatan,
+          'golongan'      => $this->input->post('golongan'),
+          'nip'           => $this->input->post('nip')
         );
         $this->db->where('id_pejabat', $id_pejabat);
         $this->db->update('pejabat', $data1);
-
       }
+
+      public function get_beranda(){
+        $query = $this->db->query('SELECT id_penelitian FROM penelitian');
+        return $query->num_rows();
+      }
+
+      public function jum_penelitian(){
+        $query = $this->db->query('SELECT id_penelitian
+                                   FROM penelitian
+                                   WHERE jenis_surat = "penelitian"');
+        return $query->num_rows();
+      }
+
+      public function jum_pkl(){
+        $query = $this->db->query('SELECT id_penelitian
+                                   FROM penelitian
+                                   WHERE jenis_surat = "pkl" or jenis_surat = "pkl_medis"');
+        return $query->num_rows();
+      }
+
+      public function get_pejabat(){
+        $query = $this->db->query('SELECT * FROM pejabat');
+        return $query->result_array();
+      }
+
+      public function get_univ(){
+        $query = $this->db->query('SELECT DISTINCT institusi,COUNT(institusi) as Jumlah
+                                   FROM pengaju
+                                   JOIN penelitian ON penelitian.id_pengaju = pengaju.id_pengaju
+                                   WHERE jenis_surat = "penelitian"
+                                   GROUP BY institusi ORDER BY Jumlah
+                                   DESC LIMIT 5');
+        return $query->result_array();
+      }
+      public function get_univ_pkl(){
+        $query = $this->db->query('SELECT DISTINCT institusi,COUNT(institusi) as Jumlah
+                                   FROM pengaju
+                                   JOIN penelitian ON penelitian.id_pengaju = pengaju.id_pengaju
+                                   WHERE jenis_surat ="pkl" or jenis_surat = "pkl_medis"
+                                   GROUP BY institusi ORDER BY Jumlah
+                                   DESC LIMIT 5');
+        return $query->result_array();
+      }
+
+      public function get_peng_bulan(){
+        $query = $this->db->query('SELECT MONTH(waktu_pembuatan) as bulan,COUNT(waktu_pembuatan)as jumlah
+                                   FROM penelitian
+                                   GROUP BY MONTH(waktu_pembuatan) ');
+        return $query->result_array();
+      }
+
+      public function get_jumlah_hari_ini(){
+        $query = $this->db->query('SELECT id_penelitian
+                                   FROM penelitian
+                                   WHERE DATE(waktu_pembuatan) = CURDATE()');
+        return $query->num_rows();
+      }
+
+      public function get_jumlah_minggu_ini(){
+        $query = $this->db->query('SELECT waktu_pembuatan
+                                   FROM penelitian
+                                   WHERE YEARWEEK(waktu_pembuatan)=YEARWEEK(NOW())');
+        return $query->num_rows();
+      }
+
+      function getLastInserted() {
+        return $this->db->insert_id();
+      }
+
     }
 
+    // if ($query->num_rows() >0){
+    //     foreach ($query->result() as $data) {
+    //         # code...
+    //         $penelitian[] = $data;
+    //     }
+    // return $penelitian; //hasil dari semua proses ada dimari
+    // }
 
  ?>

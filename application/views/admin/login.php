@@ -6,7 +6,7 @@ $attributes = array('onsubmit' => "return validate();");
 echo form_open('login/validasi',$attributes);
 ?>
 <div class="title-login teal lighten-1 z-depth-1">
-  sistem informasi izin penelitian (SIIP)
+  Sistem Informasi Pengajuan Izin Penelitian & Kerja Praktek
   <span>Version Beta 1.0</span>
 </div>
 <div class="container">

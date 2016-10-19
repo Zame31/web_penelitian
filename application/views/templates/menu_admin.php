@@ -1,9 +1,8 @@
-<ul class="side-nav fixed">
+<ul class="side-nav fixed" id="scroll">
   <li>
     <div class="userView">
     <div class="background"></div>
       <a href="#!user" class="logo"><img class="responsive-img" src="<?php echo base_url() ?>assets/img/logo.png"></a>
-      <!-- <span class="title-web">sistem informasi <br> izin penelitian (SIIP)</span> -->
       <span class="sub-title-web">dinas kesehatan <br> kota bandung</span>
     </div>
   </li>
@@ -27,8 +26,8 @@
         <div class="collapsible-body">
           <ul>
             <li><a href="<?php echo site_url('penelitian/lihat'); ?>">Data Pengajuan </a></li>
-            <li><a href="<?php echo site_url('penelitian/mail'); ?>">Kirim E-Mail</a></li>
             <li><a href="<?php echo site_url('penelitian/laporan'); ?>">Cetak Laporan</a></li>
+            <li><a href="<?php echo site_url('penelitian/mail'); ?>">Kirim E-Mail</a></li>
           </ul>
         </div>
       </li>
@@ -40,8 +39,24 @@
           <ul>
             <li><a href="<?php echo site_url('pkl/lihat'); ?>">Data Kerja Praktek</a></li>
             <li><a href="<?php echo site_url('pkl/laporan'); ?>">Cetak Laporan</a></li>
+            <li><a href="<?php echo site_url('pkl/mail'); ?>">Kirim E-Mail</a></li>
           </ul>
         </div>
+      </li>
+      <li>
+        <a class="collapsible-header waves-effect waves-teal icon-menu">
+          <i class="material-icons">account_circle</i>
+          Admin</a>
+        <div class="collapsible-body">
+          <ul>
+            <li><a href="<?php echo site_url('admin/lihat'); ?>">Data Admin</a></li>
+            <li><a href="<?php echo site_url('admin/tambah'); ?>">Tambah Admin</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="<?php echo site_url('penelitian/pengaturan'); ?>" class="icon-menu">
+          <i class="material-icons">settings</i>Pengaturan</a>
       </li>
       <li>
         <a href="<?php echo site_url('login/logout'); ?>" class="icon-menu"><i class="material-icons">power_settings_new</i>Logout</a>

@@ -5,7 +5,15 @@ class Login_model extends CI_Model{
 	}
 
 	function ambil_data($data){
-		$user = $this->db->get_where('admin',$data);
-		return $user->num_rows();
+		$this->db->select("*");
+		$this->db->from("admin");
+		$this->db->where('username', $data);
+		$query = $this->db->get();
+		if ($query->num_rows() >0){
+			foreach ($query->result() as $data) {
+				$admin[] = $data;
+			}
+		return $admin;
+		}
 	}
 }

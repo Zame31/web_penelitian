@@ -11,11 +11,12 @@ class Penelitian extends CI_Controller {
 		$this->load->helper('date_helper');
 		$this->load->library('session');
 		$this->load->library('form_validation');
-
   }
+
 	public function send_mail($id){
 
 		$mail = $this->penelitian_model->get_mail($id);
+		$jenis_surat = $this->penelitian_model->get_jenis_surat($id);
 
 	  $config = Array(
 	  'protocol' => 'smtp',
@@ -35,12 +36,21 @@ class Penelitian extends CI_Controller {
 	  $this->email->message('Cobaan Email Gan');
 
 	  if (!$this->email->send()) {
-	    show_error($this->email->print_debugger());
+			$this->session->set_flashdata('success_msg', 'E-Mail Gagal Dikirim');
+			if ($jenis_surat == "penelitian") {
+				redirect('penelitian/mail');
+			} else {
+				redirect('pkl/mail');
+			}
 		}
 	  else {
 			$this->penelitian_model->update_mail($id);
 			$this->session->set_flashdata('success_msg', 'E-Mail Berhasil Di Kirim');
-			redirect('penelitian/mail');
+			if ($jenis_surat == "penelitian") {
+				redirect('penelitian/mail');
+			} else {
+				redirect('pkl/mail');
+			}
 	  }
 }
 
@@ -48,10 +58,24 @@ class Penelitian extends CI_Controller {
 		if ($this->session->userdata('username')) {
 		$data = array('isi' => 'penelitian/beranda');
 		$data['penelitian'] = $this->penelitian_model->get_beranda();
+		$data['jum_pen'] = $this->penelitian_model->jum_penelitian();
+		$data['jum_pkl'] = $this->penelitian_model->jum_pkl();
 		$data['univ'] = $this->penelitian_model->get_univ();
+		$data['univ_pkl'] = $this->penelitian_model->get_univ_pkl();
 		$data['bulan_peng'] = $this->penelitian_model->get_peng_bulan();
 		$data['jum_hari_ini'] = $this->penelitian_model->get_jumlah_hari_ini();
 		$data['jum_minggu_ini'] = $this->penelitian_model->get_jumlah_minggu_ini();
+		$data['pejabat'] = $this->penelitian_model->get_pejabat();
+		$this->load->view('templates/themes', $data);
+		}
+		else{
+			redirect('login');
+		}
+	}
+
+	public function pengaturan(){
+		if ($this->session->userdata('username')) {
+		$data = array('isi' => 'penelitian/pengaturan');
 		$data['pejabat'] = $this->penelitian_model->get_pejabat();
 		$this->load->view('templates/themes', $data);
 		}
@@ -121,8 +145,17 @@ class Penelitian extends CI_Controller {
 	public function tambah(){
 		if ($this->session->userdata('username')) {
 			$data['isi'] = 'penelitian/tambah';
+
+			$kata = array('is_unique' => 'Kolom <b> "%s" </b> terjadi duplikasi data. ');
 			$this->validasi();
-			$this->form_validation->set_rules('maksud','Maksud','required|is_unique[penelitian.maksud]');
+
+			$jenis_surat=$this->input->post('jenis_surat');
+
+			if ($jenis_surat=="penelitian") {
+				$this->form_validation->set_rules('maksud','Maksud','required|is_unique[penelitian.maksud]',$kata);
+			}elseif ($jenis_surat=="pkl") {
+				$this->form_validation->set_rules('maksud','Maksud','required',$kata);
+			}
 
 			if ($this->form_validation->run()) {
 				$this->penelitian_model->set_penelitian();
@@ -167,7 +200,7 @@ class Penelitian extends CI_Controller {
 
 		$this->penelitian_model->update_sekertaris();
 		$this->session->set_flashdata('success_msg', 'Sekertaris Berhasil Di Perbaharui');
-		redirect('penelitian/beranda');
+		redirect('penelitian/pengaturan');
 	}
 
 	public function delete($id){

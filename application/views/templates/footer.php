@@ -1,11 +1,9 @@
 
-<script src="<?php echo base_url() ?>assets/js/jquery.min.js"></script>
-<script src="<?php echo base_url() ?>assets/vendor/materialize/materialize.min.js"></script>
-
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/chart.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/vendor/materialize/materialize.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/vendor/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/vendor/datatables/datatables_style.min.js"></script>
 
 <!-- MATERIALIZE -->
 <script type="text/javascript">
@@ -29,7 +27,6 @@
 
  $(".button-collapse").sideNav();
 
-
 	$(function() {
 	  $('input.autocomplete').autocomplete({
 	    data: {
@@ -37,7 +34,7 @@
 	      "Universitas Komputer Indonesia (UNIKOM)": null,
 				"Universitas Padjajaran (UNPAD)": null,
 	      "STIK Immanuel Bandung": null,
-	      "STIKes Jenderal Achmad Yani (UNJANI)": null,
+	      "Universitas Jenderal Achmad Yani (UNJANI)": null,
 	      "Universitas Telkom": null,
 				"Universitas Islam Bandung (UNISBA)":null,
 				"STIKep PPNI jawa Barat":null,
@@ -46,7 +43,27 @@
 				"Institut Teknologi Nasional (ITENAS)":null,
 				"STIKep PPNI jawa Barat":null,
 				"Bina Sarana Informatika (BSI)":null,
-				"Sekolah Tinggi Farmasi Bandung (STFB)":null
+				"SMK Provita":null,
+				"SMK Merdeka":null,
+				"Universitas Pasundan (UNPAS)":null,
+				"Universitas Sanggabuana":null,
+				"Politeknik Negeri Bandung (Polban)":null,
+				"STIMIK LPKIA":null,
+				"SMK Kencana":null,
+				"Politeknik LP3I Bandung":null,
+				"CSBI Bandung":null,
+				"SMK Negeri 3 Bandung":null,
+				"POLTEKES Bandung ":null,
+				"STIKes Rajawali":null,
+				"STIKes Santo Boromeus":null,
+				"STIKep PPNI jawa Barat":null,
+	      "Universitas Pendidikan Indonesia (UPI)" :null,
+				"Universitas Maranatha": null,
+	      "Institut Teknologi Harapan Bangsa (ITHB)":null,
+				"Institut Teknologi Bandung (ITB)":null,
+				"Institut Pertanian Bogor (IPB)":null,
+				"Sekolah Tinggi Farmasi Bandung (STFB)":null,
+				"Universitas Muhammadiyah Yogyakarta":null
 	    }
 	  });
 	});
@@ -105,8 +122,8 @@ $(document).ready(function() {
 						}
 
 				}
-		} );
-} );
+		});
+});
 
 $(document).ready(function() {
     var dataTable = $('#example').dataTable();
@@ -115,13 +132,6 @@ $(document).ready(function() {
     });
 });
 
-
 </script>
-
-
-
-
-
-
 </body>
 </html>

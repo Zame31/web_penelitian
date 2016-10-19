@@ -4,7 +4,7 @@
 <main>
 
   <div class="title">
-    <span>sistem informasi izin penelitian (SIIP)</span>
+    <span>Sistem Informasi Pengajuan Izin Penelitian & Kerja Praktek</span>
       <div class="col s12 bred">
         <a href="#!" class="breadcrumb">pengajuan Penelitian</a>
         <a href="#!" class="breadcrumb">Kirim E-Mail</a>
@@ -23,8 +23,6 @@
   </nav>
 
   <div class="content ">
-
-
     <div class="card-panel white lighten-2">
     <table class="highlight striped" id="example">
       <thead>
@@ -56,14 +54,11 @@
 
           <td>
             <?php if ($news_item->status_mail == 'sudah'){ ?>
-              <div class="btn green lighten-1 pad">
-                sudah
-              </div>
+              <div class="btn green lighten-1 pad"> sudah </div>
             <?php }else { ?>
-              <div class="btn red lighten-1 pad">
-                belum
-              </div>
+              <div class="btn red lighten-1 pad"> belum </div>
             <?php } ?>
+
           </td>
 
           <td>

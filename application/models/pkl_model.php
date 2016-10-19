@@ -13,13 +13,7 @@
       $this->db->or_where("jenis_surat", "pkl");
       $this->db->order_by("waktu_pembuatan","asc");
       $query = $this->db->get();
-        if ($query->num_rows() >0){
-            foreach ($query->result() as $data) {
-                # code...
-                $penelitian[] = $data;
-            }
-        return $penelitian; //hasil dari semua proses ada dimari
-        }
+      return $query->result();
     }
 
     public function get_laporan(){
@@ -32,7 +26,6 @@
       $this->db->select("*");
       $this->db->from("penelitian");
       $this->db->join("pengaju", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
-
       $this->db->where('month(waktu_pembuatan) >=', $b1);
       $this->db->where('month(waktu_pembuatan) <=', $b2);
       $this->db->where('year(waktu_pembuatan) >=', $t1);
@@ -41,13 +34,24 @@
       $this->db->or_where('jenis_surat', 'pkl_medis');
       $this->db->order_by("waktu_pembuatan","asc");
       $query = $this->db->get();
-
-      if ($query->num_rows() >0){
-          foreach ($query->result() as $data) {
-            $penelitian[] = $data;
-          }
-      return $penelitian;
-      }
+      return $query->result();
 
     }
+
+    public function get_mail_pkl(){
+      $this->db->select("*");
+      $this->db->from("penelitian");
+      $this->db->join("pengaju", "pengaju.id_pengaju = penelitian.id_pengaju","inner");
+      $this->db->where('jenis_surat', 'pkl');
+      $this->db->or_where('jenis_surat', 'pkl_medis');
+      $this->db->order_by("status_mail","asc");
+      $this->db->order_by("waktu_pembuatan","desc");
+      $query = $this->db->get();
+      return $query->result();
+    }
+
+    public function delete_penelitian($id_penelitian){
+      $this->db->delete('penelitian', array('id_penelitian'=>$id_penelitian));
+    }
+
   }

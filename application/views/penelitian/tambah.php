@@ -1,10 +1,13 @@
+<?php if (validation_errors()) { ?>
+      <div id="snackbar"> <?php echo validation_errors(); ?> </div>
+  <?php } ?>
 <?php
 $attributes = array('target' => '_blank','onsubmit' => "return validate();");
 echo form_open('penelitian/tambah',$attributes);
 ?>
 <main>
   <div class="title">
-    <span>sistem informasi izin penelitian (SIIP)</span>
+    <span>Sistem Informasi Pengajuan Izin Penelitian & Kerja Praktek</span>
       <div class="col s12 bred">
         <a href="#!" class="breadcrumb">pengajuan Penelitian</a>
         <a href="#!" class="breadcrumb">Buat Pengajuan</a>
@@ -35,6 +38,10 @@ echo form_open('penelitian/tambah',$attributes);
                   <label  >Dari Institusi :</label>
                 <input id="val1" type="text" class="autocomplete" name="institusi" value="<?php echo set_value('institusi'); ?>">
               </div>
+              <div class="input-field col s6">
+                  <label  >E-Mail :</label>
+                <input type="text" name="mail" value="<?php echo set_value('email'); ?>">
+              </div>
             </div>
           </div>
         </div>
@@ -57,7 +64,7 @@ echo form_open('penelitian/tambah',$attributes);
                 <div class="input-field col s12">
                   <textarea name="maksud" id="val4" class="materialize-textarea"><?php echo set_value('maksud'); ?></textarea>
                   <label for="val4">Maksud</label>
-                  <?php echo validation_errors(); ?>
+
                 </div>
                 <div class="row">
                   <div class="input-field col s6">

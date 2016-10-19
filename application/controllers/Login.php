@@ -11,22 +11,53 @@ class Login extends CI_Controller {
 	}
 
 	function validasi() {
-		$data=array(
-			'username'=>$this->input->post('username'),
-			'password'=>$this->input->post('password')
-			);
+		$pas = $this->input->post('password');
+		$user = $this->input->post('username');
 
-		$cek=$this->login_model->ambil_data($data);
-		if($cek == 1) {
-			$sesi=$this->session->set_userdata($data);
-			$this->session->set_flashdata('success_msg', 'Selamat Datang, '.$data['username'].' !');
+		$admin = $this->login_model->ambil_data($user);
+
+		if ($admin > 0) {
+			foreach ($admin as $baru) {
+				$hash_pas = $baru->password;
+				$hak_akses = $baru->akses;
+			}
+		}else {
+			$hash_pas = '';
+		}
+
+		$newdata = array(
+			'username'  => $user,
+      'akses'     => $hak_akses
+		);
+
+ 		if (password_verify($pas, $hash_pas)) {
+			$sesi=$this->session->set_userdata($newdata);
+			$this->session->set_flashdata('success_msg', 'Selamat Datang, '.$newdata['username'].'!');
 			redirect('penelitian/beranda');
-			}
-			else{
-				$this->session->set_flashdata('fail', 'Username atau Password Salah!');
-				$data=array('isi' =>'admin/login');
-				$this->load->view('templates/themes_login', $data);
-			}
+		}else {
+			$this->session->set_flashdata('fail', 'Username atau Password Salah!');
+			$data=array('isi' =>'admin/login');
+			$this->load->view('templates/themes_login', $data);
+ 		}
+
+
+
+		// $data=array(
+		// 	'username'=>$this->input->post('username'),
+		// 	'password'=>$this->input->post('password')
+		// 	);
+		//
+		// $cek=$this->login_model->ambil_data($data);
+		// if($cek == 1) {
+		// 	$sesi=$this->session->set_userdata($data);
+		// 	$this->session->set_flashdata('success_msg', 'Selamat Datang, '.$data['username'].' !');
+		// 	redirect('penelitian/beranda');
+		// 	}
+		// 	else{
+		// 		$this->session->set_flashdata('fail', 'Username atau Password Salah!');
+		// 		$data=array('isi' =>'admin/login');
+		// 		$this->load->view('templates/themes_login', $data);
+		// 	}
 		}
 
 	function logout() {

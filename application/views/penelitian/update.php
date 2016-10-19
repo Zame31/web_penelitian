@@ -3,7 +3,7 @@
 <input type="text" name="id_pengaju" value="<?php echo $news_item['id_pengaju'] ?>" hidden>
 <main>
   <div class="title">
-    <span>sistem informasi izin penelitian (SIIP)</span>
+    <span>Sistem Informasi Pengajuan Izin Penelitian & Kerja Praktek</span>
       <div class="col s12 bred">
         <a href="#!" class="breadcrumb">pengajuan Penelitian</a>
         <a href="#!" class="breadcrumb">data Pengajuan</a>
@@ -34,6 +34,10 @@
               <div class="input-field col s6">
                 <label class="active">Dari Institusi :</label>
                 <input id="val1" type="text" class="autocomplete" name="institusi" value="<?php echo $news_item['institusi'] ?>">
+              </div>
+              <div class="input-field col s6">
+                  <label  >E-Mail :</label>
+                <input type="text" name="mail" value="<?php echo $news_item['mail'] ?>">
               </div>
             </div>
           </div>
@@ -151,7 +155,6 @@
                                 }
 
                               sort($a);
-                              //print_r($a);
                               $array = [];
                               for($i=0;$i<count($hobi);$i++){
                               	if(in_array($i,$a))
@@ -164,7 +167,7 @@
                             }
                     for ($i=0; $i <count($hobi); $i++) { ?>
                       <div class="col s6">
-                        <input type="checkbox" class="filled-in" id="teb<?php echo $i ?>" name="hobi[]" value="<?php echo $i ?>" <?php if ($i== ($array[$i] )) { echo "checked";}else {echo "";} ?> />
+                        <input type="checkbox" class="filled-in" id="teb<?php echo $i ?>" name="hobi[]" value="<?php echo $i ?>" <?php if ($i == ($array[$i] )) { echo "checked";}else {echo "";} ?> />
                         <label for="teb<?php echo $i ?>"><?php echo $hobi[$i] ?></label>
                       </div>
 

@@ -3,7 +3,7 @@
   echo form_open('pkl/laporan',$attributes); ?>
 <main>
   <div class="title">
-    <span>sistem informasi izin penelitian (SIIP)</span>
+    <span>Sistem Informasi Pengajuan Izin Penelitian & Kerja Praktek</span>
       <div class="col s12 bred">
         <a href="#!" class="breadcrumb">Pengajuan Kerja Praktek</a>
         <a href="#!" class="breadcrumb">Cetak Laporan</a>

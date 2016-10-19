@@ -2,14 +2,12 @@
       <div id="snackbar"> <?php echo $this->session->flashdata('success_msg') ?> </div>
   <?php } ?>
 <main>
-
   <div class="title">
     <span>Sistem Informasi Pengajuan Izin Penelitian & Kerja Praktek</span>
       <div class="col s12 bred">
-        <a href="#!" class="breadcrumb">pengajuan Penelitian</a>
-        <a href="#!" class="breadcrumb">Data Pengajuan</a>
+        <a href="#!" class="breadcrumb">Admin</a>
+        <a href="#!" class="breadcrumb">Data Admin</a>
       </div>
-
   </div>
   <nav class="teal">
     <div class="nav-wrapper ">
@@ -29,50 +27,44 @@
       <thead>
         <tr>
           <th>No</th>
-          <th width="130px">Waktu Pembuatan Surat</th>
-          <th width="160px">Nama</th>
-          <th>Institusi</th>
-          <th>Maksud Penelitian</th>
-          <th width="120px">Control</th>
+          <th>Username</th>
+          <th>Nama Lengkap</th>
+          <th>E-Mail</th>
+          <th>Akses</th>
+          <th width="80px">Control</th>
         </tr>
       </thead>
       <tbody>
-        <!-- data dari Controller as nama baru -->
 
         <?php
         $i=1;
-        if ($penelitian > 0 ) {
+        if ($admin > 0 ) {
 
-        foreach ($penelitian as $news_item) { ?>
+        foreach ($admin as $news_item) { ?>
         <tr>
           <!-- atribut di table database -->
           <td align="center"><?php echo $i; ?></td>
-          <td><?php echo tgl_indo($news_item->waktu_pembuatan); ?></td>
-          <td><?php echo $news_item->nama; ?></td>
-
-            <td><?php echo $news_item->institusi; ?></td>
-            <td><?php echo $news_item->maksud; ?></td>
-
+          <td><?php echo $news_item->username; ?></td>
+          <td><?php echo $news_item->nama_lengkap; ?></td>
+          <td><?php echo $news_item->email; ?></td>
+          <td><?php echo $news_item->akses; ?></td>
           <td>
-            <a class="waves-effect waves-light btn green lighten-1 pad" target="_blank" href="<?php echo site_url('penelitian/cetak/'.$news_item->id_penelitian); ?>">
-              <i class="material-icons">print</i>
-            </a>
-            <a class="waves-effect waves-light btn blue lighten-1 pad" href="<?php echo site_url('penelitian/update/'.$news_item->id_penelitian); ?>">
+            <a class="waves-effect waves-light btn blue lighten-1 pad" href="<?php echo site_url('admin/update/'.$news_item->id_admin); ?>">
               <i class="material-icons">update</i>
             </a>
-            <a href="#modal<?php echo $news_item->id_penelitian ?>" class="btn red lighten-2 modal-trigger waves-effect waves-light pad">
+            <a href="#modal<?php echo $news_item->id_admin ?>" class="btn red lighten-2 modal-trigger waves-effect waves-light pad">
               <i class="material-icons">delete</i>
             </a>
           </td>
         </tr>
 
-        <div id="modal<?php echo $news_item->id_penelitian ?>" class="delete modal">
+        <div id="modal<?php echo $news_item->id_admin ?>" class="delete modal">
           <div class="modal-content">
             <h6>anda yakin ingin menghapus data ini ?</h6>
           </div>
           <div class="modal-footer">
             <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat" >Tidak</a>
-            <a href="<?php echo site_url('penelitian/delete/'.$news_item->id_penelitian); ?>" class=" modal-action waves-effect waves-green btn-flat">Iya</a>
+            <a href="<?php echo site_url('admin/delete/'.$news_item->id_admin); ?>" class=" modal-action waves-effect waves-green btn-flat">Iya</a>
           </div>
         </div>
 

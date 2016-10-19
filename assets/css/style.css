@@ -95,10 +95,16 @@ a.card .card-panel.custom {
 	width: 100%;
 	height: 300px;
 }
-
+h4.title-grafik {
+	font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #888;
+}
 /*main*/
 header, main, footer {
-  padding-left: 220px;
+  padding-left: 240px;
 }
 
 @media only screen and (max-width : 992px) {
@@ -213,7 +219,7 @@ table.highlight>tbody>tr:hover {
     color: #fff;
 }
 .side-nav {
-    width: 220px;
+    width: 240px;
 }
 .side-nav .collapsible-body li a,
 .side-nav.fixed .collapsible-body li a {
@@ -277,3 +283,25 @@ input:not([type]).valid+label:after, input:not([type]):focus.valid+label:after, 
     to {bottom: 0; opacity: 0;}
 }
 /*end toast*/
+
+/*scroll*/
+#scroll {
+	overflow-y: scroll;
+}
+#scroll::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0);
+	background-color: #fff;
+}
+
+#scroll::-webkit-scrollbar
+{
+	width: 3px;
+	background-color: #fff;
+}
+
+#scroll::-webkit-scrollbar-thumb
+{
+	background-color: #26a69a;
+	border: 1px solid #26a69a;
+}

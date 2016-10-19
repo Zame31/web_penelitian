@@ -26,7 +26,6 @@ class Pkl extends CI_Controller {
   public function laporan(){
 		if ($this->session->userdata('username')) {
 			$data = array('isi' => 'pkl/laporan');
-
 			$this->form_validation->set_rules('b1','Dari Bulan','required');
 			$this->form_validation->set_rules('b2','Sampai Bulan','required');
 			$this->form_validation->set_rules('t1','Dari Tahun','required');
@@ -57,6 +56,56 @@ class Pkl extends CI_Controller {
 		$pdf->WriteHTML($html);
 		$pdf->Output('laporan.pdf',I);
 	}
+
+  public function mail(){
+		if ($this->session->userdata('username')) {
+			$data = array('isi' => 'penelitian/mail');
+			$data['penelitian'] = $this->pkl_model->get_mail_pkl();
+			$this->load->view('templates/themes', $data);
+		}
+		else{
+			redirect('login');
+		}
+	}
+
+  public function send_mail($id){
+
+		$mail = $this->penelitian_model->get_mail($id);
+
+	  $config = Array(
+	  'protocol' => 'smtp',
+	  'smtp_host' => 'ssl://smtp.googlemail.com',
+	  'smtp_port' => 465,
+	  'smtp_user' => 'znurzamanz@gmail.com',
+	  'smtp_pass' => 'focusandstudying',
+		'mailtype' => 'html',
+	  'charset' => 'iso-8859-1',
+	  'wordwrap' => TRUE
+	);
+	  $this->load->library('email', $config);
+		$this->email->set_newline("\r\n");
+	  $this->email->from('znurzamanz@gmail.com', 'Zamzam');
+	  $this->email->to($mail);
+	  $this->email->subject('Dinas Kesehatan Kota Bandung');
+	  $this->email->message('Cobaan Email Gan');
+
+	  if (!$this->email->send()) {
+			$this->session->set_flashdata('success_msg', 'E-Mail Gagal Dikirim');
+			redirect('pkl/mail');
+		}
+	  else {
+			$this->penelitian_model->update_mail($id);
+			$this->session->set_flashdata('success_msg', 'E-Mail Berhasil Di Kirim');
+			redirect('pkl/mail');
+	  }
+}
+
+  public function delete($id){
+    $this->pkl_model->delete_penelitian($id);
+		$this->session->set_flashdata('success_msg', 'Data Berhasil Di Hapus');
+    redirect('pkl/lihat');
+  }
+
 
 
 }
