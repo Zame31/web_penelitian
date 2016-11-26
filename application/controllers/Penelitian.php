@@ -30,10 +30,12 @@ class Penelitian extends CI_Controller {
 	);
 	  $this->load->library('email', $config);
 		$this->email->set_newline("\r\n");
-	  $this->email->from('znurzamanz@gmail.com', 'Zamzam');
+	  $this->email->from('znurzamanz@gmail.com', 'DINAS KESEHATAN KOTA BANDUNG');
 	  $this->email->to($mail);
-	  $this->email->subject('Dinas Kesehatan Kota Bandung');
-	  $this->email->message('Cobaan Email Gan');
+	  $this->email->subject('SURAT KETERANGAN');
+	  $this->email->message('Dengan ini memberitahukan bahwa surat keterangan telah selesai dibuat,
+													 silahkan ambil dibagian Umum. Untuk informasi lainnya bisa ditanyakan di bagian Umum.
+													 Terima Kasih. ');
 
 	  if (!$this->email->send()) {
 			$this->session->set_flashdata('success_msg', 'E-Mail Gagal Dikirim');
@@ -57,15 +59,17 @@ class Penelitian extends CI_Controller {
 	public function beranda(){
 		if ($this->session->userdata('username')) {
 		$data = array('isi' => 'penelitian/beranda');
-		$data['penelitian'] = $this->penelitian_model->get_beranda();
-		$data['jum_pen'] = $this->penelitian_model->jum_penelitian();
-		$data['jum_pkl'] = $this->penelitian_model->jum_pkl();
-		$data['univ'] = $this->penelitian_model->get_univ();
-		$data['univ_pkl'] = $this->penelitian_model->get_univ_pkl();
-		$data['bulan_peng'] = $this->penelitian_model->get_peng_bulan();
-		$data['jum_hari_ini'] = $this->penelitian_model->get_jumlah_hari_ini();
+		$data['penelitian'] 		= $this->penelitian_model->get_beranda();
+		$data['jum_pen'] 				= $this->penelitian_model->jum_penelitian();
+		$data['jum_pkl'] 				= $this->penelitian_model->jum_pkl();
+		$data['univ'] 					= $this->penelitian_model->get_univ();
+		$data['univ_pkl'] 			= $this->penelitian_model->get_univ_pkl();
+		$data['bulan_peng'] 		= $this->penelitian_model->get_peng_bulan();
+		$data['jum_hari_ini'] 	= $this->penelitian_model->get_jumlah_hari_ini();
 		$data['jum_minggu_ini'] = $this->penelitian_model->get_jumlah_minggu_ini();
-		$data['pejabat'] = $this->penelitian_model->get_pejabat();
+		$data['jum_penempatan'] = $this->penelitian_model->get_jumlah_penempatan();
+		$data['jum_bagian'] 		= $this->penelitian_model->get_jumlah_bagian();
+		$data['pejabat'] 				= $this->penelitian_model->get_pejabat();
 		$this->load->view('templates/themes', $data);
 		}
 		else{
@@ -273,7 +277,6 @@ class Penelitian extends CI_Controller {
 		$this->form_validation->set_rules('institusi','Institusi','required',$katakata);
 		$this->form_validation->set_rules('nama','Nama','required',$katakata);
 		$this->form_validation->set_rules('alamat','Alamat','required',$katakata);
-
 		$this->form_validation->set_rules('mulai','Mulai','required',$katakata);
 		$this->form_validation->set_rules('selesai','Selesai','required',$katakata);
 		$this->form_validation->set_rules('no_bkbpm','Nomor BKBPM','required',$katakata);
@@ -281,6 +284,80 @@ class Penelitian extends CI_Controller {
 		$this->form_validation->set_rules('surat','Surat','required',$katakata);
 		$this->form_validation->set_rules('no_surat','Nomor Surat','required',$katakata);
 		$this->form_validation->set_rules('tanggal_surat','Tanggal Surat','required',$katakata);
+	}
+
+	// PENEMPATAN
+	public function form_penempatan($id){
+		if ($this->session->userdata('username')) {
+			$data['isi'] = 'penelitian/form_penempatan';
+
+			$this->form_validation->set_rules('bagian','Bagian','required');
+			$this->form_validation->set_rules('id_pejabat','Pejabat','required');
+
+			$bagian = $this->input->post('bagian');
+			$pejabat = $this->input->post('id_pejabat');
+
+			if ($this->form_validation->run() === FALSE) {
+				$data['news_item'] = $this->penelitian_model->get_penempatan_id($id);
+				$data['pejabat'] = $this->penelitian_model->get_pejabat_all();
+				$this->load->view('templates/themes', $data);
+			}else {
+				$this->penelitian_model->set_penempatan($id);
+				$this->session->set_flashdata('success_msg', 'Berhasil Ditempatkan');
+				redirect('penelitian/penempatan');
+			}
+		}
+		else{
+			redirect('login');
+		}
+	}
+
+	public function edit_penempatan($id){
+		if ($this->session->userdata('username')) {
+			$data['isi'] = 'penelitian/edit_penempatan';
+			$data['news_item'] = $this->penelitian_model->get_penempatan_id($id);
+			$data['pejabat'] = $this->penelitian_model->get_pejabat_all();
+			$this->load->view('templates/themes', $data);
+		}
+		else{
+			redirect('login');
+		}
+	}
+
+	public function proses_edit_penempatan(){
+		if ($this->session->userdata('username')) {
+			$this->penelitian_model->update_penempatan();
+			$this->session->set_flashdata('success_msg', 'Berhasil Dipindahkan');
+			redirect('penelitian/penempatan');
+		}
+		else{
+			redirect('login');
+		}
+	}
+
+	public function set_penempatan(){
+		if ($this->session->userdata('username')) {
+			$this->penelitian_model->set_penempatan();
+			$this->session->set_flashdata('success_msg', 'Berhasil Ditempatkan');
+			redirect('penelitian/penempatan');
+		}
+		else{
+			redirect('login');
+		}
+	}
+
+	public function penempatan(){
+		if ($this->session->userdata('username')) {
+			$data = array('isi' => 'penelitian/penempatan');
+			$data['penempatan'] = $this->penelitian_model->get_penempatan_belum();
+			$data['penempatan_sudah'] = $this->penelitian_model->get_penempatan_sudah();
+			$data['pejabat'] = $this->penelitian_model->get_pejabat_all();
+			$this->load->view('templates/themes', $data);
+
+		}
+		else{
+			redirect('login');
+		}
 	}
 
 }

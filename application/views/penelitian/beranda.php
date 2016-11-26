@@ -9,24 +9,7 @@
     $label_bulan = $label_bulan.'"'.bulan($bul['bulan']).'",';
   }
 ?>
-<script type="text/javascript">
-  window.onload = function() {
-    var ctx = $("#myChart").get(0).getContext("2d");
-    var data = {
-      labels: [<?php echo $label_bulan; ?>],
-      datasets: [
-        {
-          fillColor: "rgba(51,153,153,0.5)",
-          strokeColor: "#339999",
-          pointColor: "#339999",
-          pointStrokeColor: "#fff",
-          data: [<?php echo $data_bulan; ?>]
-        }
-      ]
-    }
-    var myNewChart = new Chart(ctx).Line(data);
-  };
-</script>
+
 
 <main>
   <div class="content">
@@ -119,6 +102,73 @@
           <?php } ?>
       </div>
     </div>
+    <div class="col s12">
+      <div class="collection">
+        <a href="#!" class="collection-item active teal lighten-2">Sedang Melakukan Kerja Praktek dan Penelitian<span class="badge"></span></a>
+        <table class="bordered highlight">
+         <thead>
+           <tr>
+               <th>No</th>
+               <th>Jenis</th>
+               <th>Bagian</th>
+               <th>Nama</th>
+               <th>Waktu</th>
+           </tr>
+         </thead>
+         <tbody>
+           <?php $i=1; ?>
+           <?php foreach ($jum_penempatan as $jumpen) { ?>
+             <tr>
+               <td><?php echo $i++; ?></td>
+               <td>
+                 <?php if ($jumpen['jenis_surat'] == 'pkl'){ ?>
+                   <div class="stat-small z-depth-1 blue lighten-1">Kerja Praktek</div>
+                 <?php }else if ($jumpen['jenis_surat'] == 'pkl_medis') { ?>
+                   <div class="stat-small z-depth-1 green lighten-1">Kerja Praktek</div>
+                  <?php }else if ($jumpen['jenis_surat'] == 'penelitian') { ?>
+                   <div class="stat-small z-depth-1 red lighten-1">Penelitian </div>
+                 <?php } ?>
+               </td>
+               <td><?php echo $jumpen['bagian']; ?></td>
+               <td> <?php echo $jumpen['nama']; ?></td>
+               <td><?php echo tgl_indo($jumpen['waktu_mulai']).' - '.tgl_indo($jumpen['waktu_selesai']); ?></td>
+             </tr>
+           <?php } ?>
+         </tbody>
+       </table>
+      </div>
+    </div>
+    <div class="col s6">
+      <div class="collection z-depth-1">
+        <a href="#!" class="collection-item active teal lighten-2">Pengajuan Per bagian<span class="badge"></span></a>
+        <a href="#!" class="collection-item">Bagian<span class="badge">Jumlah</span></a>
+          <?php foreach ($jum_bagian as $jumba) { ?>
+            <a href="#!" class="collection-item"><?php echo $jumba['jabatan']; ?>
+              <span class="badge">  <?php echo $jumba['jumlah'].'/'.$jumba['keterangan']; ?></span>
+            </a>
+          <?php } ?>
+      </div>
+    </div>
+    <!-- <div class="col s6">
+      <div class="collection z-depth-1">
+        <a href="#!" class="collection-item active teal lighten-2">Pengajuan Per bagian<span class="badge"></span></a>
+        <a href="#!" class="collection-item">Bagian<span class="badge">Jumlah</span></a>
+          <?php foreach ($bagian as $bagians) { ?>
+            <a href="#!" class="collection-item"><?php echo $bagians['jabatan']; ?>
+              <span class="badge">
+                  <?php foreach ($jum_bagian as $jumba) {
+                    if ($jumba['bagian'] == $bagians['jabatan']) {
+                      echo $jumba['jumlah'];
+                    }
+                  }
+
+                  ?>
+
+              </span>
+            </a>
+          <?php } ?>
+      </div>
+    </div> -->
     <!-- <div class="col s2">
       <a class="card" href="<?php echo site_url('penelitian/backup'); ?>">
       <div class="card-panel custom brown lighten-2">
@@ -146,3 +196,22 @@
   </div>
 </div>
 </main>
+
+<script type="text/javascript">
+  window.onload = function() {
+    var ctx = $("#myChart").get(0).getContext("2d");
+    var data = {
+      labels: [<?php echo $label_bulan; ?>],
+      datasets: [
+        {
+          fillColor: "rgba(51,153,153,0.5)",
+          strokeColor: "#339999",
+          pointColor: "#339999",
+          pointStrokeColor: "#fff",
+          data: [<?php echo $data_bulan; ?>]
+        }
+      ]
+    }
+    var myNewChart = new Chart(ctx).Line(data);
+  };
+</script>

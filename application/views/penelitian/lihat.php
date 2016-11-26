@@ -1,8 +1,8 @@
 <?php if ($this->session->flashdata('success_msg')) { ?>
       <div id="snackbar"> <?php echo $this->session->flashdata('success_msg') ?> </div>
   <?php } ?>
-<main>
 
+<main>
   <div class="title">
     <span>Sistem Informasi Pengajuan Izin Penelitian & Kerja Praktek</span>
       <div class="col s12 bred">

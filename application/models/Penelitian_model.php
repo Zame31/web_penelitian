@@ -20,7 +20,6 @@
         $query = $this->db->get();
         return $query->row_array();
       }
-
       public function get_penelitian(){
         $this->db->select("*");
         $this->db->from("penelitian");
@@ -230,7 +229,7 @@
       }
 
       public function get_pejabat(){
-        $query = $this->db->query('SELECT * FROM pejabat');
+        $query = $this->db->query('SELECT * FROM pejabat WHERE id_pejabat="P01"');
         return $query->result_array();
       }
 
@@ -273,19 +272,105 @@
                                    WHERE YEARWEEK(waktu_pembuatan)=YEARWEEK(NOW())');
         return $query->num_rows();
       }
+      public function get_jumlah_penempatan(){
+        $query = $this->db->query(
+          'SELECT nama,institusi,jenis_surat,waktu_mulai,waktu_selesai,bagian
+           FROM pengaju
+           JOIN penelitian ON penelitian.id_pengaju = pengaju.id_pengaju
+           JOIN penempatan ON penelitian.id_penelitian = penempatan.id_penelitian
+           WHERE CURDATE() BETWEEN waktu_mulai AND waktu_selesai
+            ');
+        return $query->result_array();
+      }
+
+      public function get_jumlah_bagian(){
+        $query = $this->db->query(
+          'SELECT jabatan, SUM(CASE WHEN bagian = jabatan THEN 1 ELSE 0 END) as jumlah,
+                          (CASE WHEN SUM(CASE WHEN bagian = jabatan THEN 1 ELSE 0 END) >= 3 THEN "Penuh" ELSE "tersedia" END) as keterangan
+            FROM pejabat, penempatan,penelitian
+            WHERE penelitian.id_penelitian = penempatan.id_penelitian AND
+            CURDATE() BETWEEN waktu_mulai AND waktu_selesai
+            GROUP BY jabatan
+          ');
+        return $query->result_array();
+      }
+
+
+
+
 
       function getLastInserted() {
         return $this->db->insert_id();
       }
+      // PENEMPATAN
+      public function get_pejabat_all(){
+        $query = $this->db->query('SELECT * FROM pejabat');
+        return $query->result_array();
+      }
 
-    }
+      public function get_penempatan_belum(){
+        $query = $this->db->query(
+          'SELECT penelitian.id_penelitian as id_penelitian,nama,institusi,jenis_surat
+            FROM penempatan
+            JOIN pejabat ON pejabat.id_pejabat = penempatan.id_pejabat
+            RIGHT JOIN penelitian ON penelitian.id_penelitian = penempatan.id_penelitian
+            JOIN pengaju ON penelitian.id_pengaju = pengaju.id_pengaju
+            WHERE jenis_surat like "penelitian" AND
+            (bagian IS NULL OR nama_pejabat IS NULL)
+            ORDER BY waktu_pembuatan
+          ');
+        return $query->result_array();
+      }
 
-    // if ($query->num_rows() >0){
-    //     foreach ($query->result() as $data) {
-    //         # code...
-    //         $penelitian[] = $data;
-    //     }
-    // return $penelitian; //hasil dari semua proses ada dimari
-    // }
+      public function get_penempatan_sudah(){
+        $query = $this->db->query(
+          'SELECT penelitian.id_penelitian as id_penelitian,nama,bagian,nama_pejabat,institusi
+            FROM penempatan
+            JOIN pejabat ON pejabat.id_pejabat = penempatan.id_pejabat
+            JOIN penelitian ON penelitian.id_penelitian = penempatan.id_penelitian
+            JOIN pengaju ON penelitian.id_pengaju = pengaju.id_pengaju
+            WHERE jenis_surat like "penelitian"
+          ');
+        return $query->result_array();
+      }
 
+      public function update_penempatan(){
+        $this->load->helper('url');
+
+        $id_penelitian = $this->input->post('id_penelitian');
+
+        $data = array (
+
+          'id_penelitian' => $id_penelitian,
+          'id_pejabat' => $this->input->post('id_pejabat'),
+          'bagian' => $this->input->post('bagian')
+        );
+        $this->db->where('id_penelitian', $id_penelitian);
+        $this->db->update('penempatan', $data);
+      }
+
+      public function set_penempatan(){
+        $data = array (
+          'id_penempatan' => "p05",
+          'id_penelitian' => $this->input->post('id_penelitian'),
+          'id_pejabat' => $this->input->post('id_pejabat'),
+          'bagian' => $this->input->post('bagian')
+        );
+        $this->db->insert('penempatan', $data);
+      }
+
+      public function get_penempatan_id($id){
+        $query = $this->db->query(
+          'SELECT penelitian.id_penelitian as id_penelitian,nama,bagian,nama_pejabat,institusi,penempatan.id_pejabat as id_pejabat
+            FROM penempatan
+            JOIN pejabat ON pejabat.id_pejabat = penempatan.id_pejabat
+            RIGHT JOIN penelitian ON penelitian.id_penelitian = penempatan.id_penelitian
+            JOIN pengaju ON penelitian.id_pengaju = pengaju.id_pengaju
+            WHERE penelitian.id_penelitian = '.$id.'
+          ');
+        return $query->row_array();
+      }
+
+
+  }
  ?>

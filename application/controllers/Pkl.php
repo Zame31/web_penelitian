@@ -23,6 +23,81 @@ class Pkl extends CI_Controller {
 		}
 	}
 
+  public function form_penempatan($id){
+		if ($this->session->userdata('username')) {
+			$data['isi'] = 'pkl/form_penempatan';
+
+      $this->form_validation->set_rules('bagian','Bagian','required');
+      $this->form_validation->set_rules('id_pejabat','Pejabat','required');
+
+      $bagian = $this->input->post('bagian');
+      $pejabat = $this->input->post('id_pejabat');
+
+			if ($this->form_validation->run() === FALSE) {
+        $data['news_item'] = $this->pkl_model->get_penempatan_id($id);
+        $data['pejabat'] = $this->pkl_model->get_pejabat_all();
+				$this->load->view('templates/themes', $data);
+			}else {
+        $this->pkl_model->set_penempatan($id);
+				$this->session->set_flashdata('success_msg', 'Berhasil Ditempatkan');
+        redirect('pkl/penempatan');
+      }
+		}
+		else{
+			redirect('login');
+		}
+	}
+
+  public function edit_penempatan($id){
+		if ($this->session->userdata('username')) {
+			$data['isi'] = 'pkl/edit_penempatan';
+      $data['news_item'] = $this->pkl_model->get_penempatan_id($id);
+      $data['pejabat'] = $this->pkl_model->get_pejabat_all();
+			$this->load->view('templates/themes', $data);
+
+		}
+		else{
+			redirect('login');
+		}
+	}
+
+  public function proses_edit_penempatan(){
+    if ($this->session->userdata('username')) {
+      $this->pkl_model->update_penempatan();
+      $this->session->set_flashdata('success_msg', 'Berhasil Dipindahkan');
+      redirect('pkl/penempatan');
+    }
+    else{
+      redirect('login');
+    }
+  }
+
+  public function set_penempatan(){
+    if ($this->session->userdata('username')) {
+      $this->pkl_model->set_penempatan();
+      $this->session->set_flashdata('success_msg', 'Berhasil Ditempatkan');
+      redirect('pkl/penempatan');
+    }
+    else{
+      redirect('login');
+    }
+  }
+
+  public function penempatan(){
+    if ($this->session->userdata('username')) {
+      $data = array('isi' => 'pkl/penempatan');
+      $data['penempatan'] = $this->pkl_model->get_penempatan_belum();
+      $data['penempatan_sudah'] = $this->pkl_model->get_penempatan_sudah();
+      $data['penelitian'] = $this->pkl_model->get_pkl();
+      $data['pejabat'] = $this->pkl_model->get_pejabat_all();
+      $this->load->view('templates/themes', $data);
+
+    }
+    else{
+      redirect('login');
+    }
+  }
+
   public function laporan(){
 		if ($this->session->userdata('username')) {
 			$data = array('isi' => 'pkl/laporan');

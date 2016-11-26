@@ -1,4 +1,5 @@
 <?php
+require_once('preloader.php');
 require_once('header.php');
 if ($this->session->userdata('akses') == "super_admin") {
   require_once('menu_admin.php');

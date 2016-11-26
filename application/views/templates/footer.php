@@ -1,15 +1,34 @@
-
 <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 <script type="text/javascript" src="<?php echo base_url() ?>assets/js/chart.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/vendor/materialize/materialize.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/vendor/datatables/datatables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/vendor/datatables/datatables_style.min.js"></script>
 
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+$('.preloader-background').delay(1000).fadeOut('slow');
+
+$('.preloader-wrapper')
+  .delay(1000)
+  .fadeOut();
+});
+</script>
+
+<!-- EMAIL PROGRESS -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('[id="email"]').click(function(){
+			$('.loading-mail').delay(0).fadeIn('slow');
+    });
+  });
+</script>
+
 <!-- MATERIALIZE -->
 <script type="text/javascript">
-	$(document).ready(function(){
-		$('.modal-trigger').leanModal();
-	});
+$(document).ready(function(){
+ $('.modal').modal();
+});
 
 	$(document).ready(function() {
 		$('select').material_select();
@@ -126,12 +145,46 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+		$('#example2').DataTable( {
+
+				"searching": true,
+				"language": {
+						"zeroRecords": "Data Tidak Ditemukan",
+						"info": "Menampilkan _START_ Sampai _END_ Dari _TOTAL_ Data",
+						"infoEmpty": "Tidak Ada Data",
+
+						"decimal": ",",
+						"thousands": ".",
+
+						"paginate": {
+							"first":      "Pertama",
+							"last":       "Terakhir",
+							"next":       "Berikutnya",
+							"previous":   "Sebelumnya"
+						}
+
+				}
+		});
+});
+
+$(document).ready(function() {
     var dataTable = $('#example').dataTable();
     $("#searchbox").keyup(function() {
         dataTable.fnFilter(this.value);
     });
 });
 
+$(document).ready(function() {
+    var dataTable = $('#example2').dataTable();
+    $("#searchbox").keyup(function() {
+        dataTable.fnFilter(this.value);
+    });
+});
+
 </script>
+
+
+
+
 </body>
 </html>

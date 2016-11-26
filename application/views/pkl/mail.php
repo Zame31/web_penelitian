@@ -58,7 +58,7 @@
             <?php } ?>
           </td>
           <td>
-            <a class="waves-effect waves-light btn blue lighten-1 pad" href="<?php echo site_url('penelitian/send_mail/'.$news_item->id_penelitian); ?>">
+            <a id="email" class="waves-effect waves-light btn blue lighten-1 pad" href="<?php echo site_url('penelitian/send_mail/'.$news_item->id_penelitian); ?>">
               <i class="material-icons">mail</i>
             </a>
           </td>

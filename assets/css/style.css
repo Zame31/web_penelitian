@@ -11,12 +11,43 @@ table {
 table tr td {
 	padding: 7px 5px;
 }
+
+/*PROGRESS MAIL*/
+.loading-mail {
+display: none;
+align-items: center;
+justify-content: center;
+background-color: #26a69a;
+position: fixed;
+z-index: 1000;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+opacity: 0.9;
+}
+.myprogress {
+	margin-top: 300px;
+}
+.myprogress span {
+	font-size: 18px;
+	color: #fff;
+	font-weight: 300;
+}
+
+.myprogress span i.material-icons {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 15px;
+}
+
 /*MENU*/
 .side-nav li>a.icon-menu>i.material-icons {
 	margin: 0 10px 0 0;
 }
 .side-nav a {
 	font-size: 13px;
+	padding: 0 16px;
 }
 .side-nav .userView.user {
 	padding: 0;
@@ -25,6 +56,7 @@ table tr td {
 	color: white;
 	font-size: 14px;
 	font-weight: 600;
+	line-height: 70px;
 	text-transform: capitalize;
 }
 .side-nav .userView.user .nama i.material-icons {
@@ -133,7 +165,8 @@ header, main, footer {
 	font-size: 14px;
 	text-transform: capitalize;
 	font-weight: 300;
-	margin-top: -7px;
+	margin-top: 17px;
+	margin-bottom: 30px;
 	color: #333333;
 	line-height: 20px;
 }
@@ -179,6 +212,10 @@ header, main, footer {
 .modal-footer a {
 	color: #26a69a;
 	font-weight: 600;
+}
+.modal-footer button {
+    color: #26a69a;
+    font-weight: 600;
 }
 
 /*custom material*/
@@ -304,4 +341,43 @@ input:not([type]).valid+label:after, input:not([type]):focus.valid+label:after, 
 {
 	background-color: #26a69a;
 	border: 1px solid #26a69a;
+}
+
+/*penempatan*/
+.penempatan.modal .modal-content {
+	padding: 0;
+}
+.penempatan .sub-tit{
+	margin: 0;
+}
+
+.tabs .indicator {
+	background-color: #26a69a;
+}
+
+
+.tabs .tab a, .tabs .tab a:hover, .tabs .tab a.active {
+    background-color: transparent;
+    color: #26a69a;
+    text-transform: capitalize;
+    font-weight: 400;
+}
+
+.tabs {
+	background-color: #fcfcfc;
+	margin-bottom: 20px;
+}
+
+.stat {
+    color: #fff;
+    padding: 9px;
+    border-radius: 4px;
+    font-weight: 400;
+    text-align: center;
+}
+.stat-small {
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 400;
 }

@@ -23,6 +23,7 @@ class Login extends CI_Controller {
 			}
 		}else {
 			$hash_pas = '';
+			$hak_akses = '';
 		}
 
 		$newdata = array(
@@ -39,25 +40,6 @@ class Login extends CI_Controller {
 			$data=array('isi' =>'admin/login');
 			$this->load->view('templates/themes_login', $data);
  		}
-
-
-
-		// $data=array(
-		// 	'username'=>$this->input->post('username'),
-		// 	'password'=>$this->input->post('password')
-		// 	);
-		//
-		// $cek=$this->login_model->ambil_data($data);
-		// if($cek == 1) {
-		// 	$sesi=$this->session->set_userdata($data);
-		// 	$this->session->set_flashdata('success_msg', 'Selamat Datang, '.$data['username'].' !');
-		// 	redirect('penelitian/beranda');
-		// 	}
-		// 	else{
-		// 		$this->session->set_flashdata('fail', 'Username atau Password Salah!');
-		// 		$data=array('isi' =>'admin/login');
-		// 		$this->load->view('templates/themes_login', $data);
-		// 	}
 		}
 
 	function logout() {

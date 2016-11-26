@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2016 at 01:15 PM
+-- Generation Time: Nov 26, 2016 at 08:24 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -57,8 +57,8 @@ INSERT INTO `admin` (`id_admin`, `nama_lengkap`, `alamat`, `tanggal_lahir`, `ema
 
 CREATE TABLE `pejabat` (
   `id_pejabat` char(8) NOT NULL,
-  `nama_pejabat` varchar(100) NOT NULL,
   `jabatan` varchar(100) NOT NULL,
+  `nama_pejabat` varchar(100) NOT NULL,
   `golongan` varchar(50) NOT NULL,
   `nip` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -67,8 +67,18 @@ CREATE TABLE `pejabat` (
 -- Dumping data for table `pejabat`
 --
 
-INSERT INTO `pejabat` (`id_pejabat`, `nama_pejabat`, `jabatan`, `golongan`, `nip`) VALUES
-('P01', 'dr. H. Zamzam Nurzaman R, M.Kes', 'Sekretaris Dinas Kesehatan Kota Bandung', 'Pembina Tk.I ', '196603191997032001');
+INSERT INTO `pejabat` (`id_pejabat`, `jabatan`, `nama_pejabat`, `golongan`, `nip`) VALUES
+('P01', 'Sekretaris Dinas Kesehatan Kota Bandung', 'dr. H. Zamzam Nurzaman R, M.Kes', 'Pembina Tk.I ', '196603191997032001'),
+('P02', 'Seksi Data dan Informasi Program Kesehatan', 'Cucu Irawan, ST, MKM', '1', '197007141991011001'),
+('P03', 'Seksi Evaluasi Program Kesehatan', 'Dra.Hj.Tetty Juhaeti', '1', '195911291979042001'),
+('P04', 'Seksi Penyusunan Program Kesehatan', 'Tjatur Subeno.SKM,M.KM', '1', '196207031988021001'),
+('P05', 'Seksi Pendayagunaan Tenaga dan Sarana Kesehatan', 'Dr.H.Sonny Adam,M.M', '1', '197204282002121004'),
+('P06', 'Seksi Promosi Kesehatan', 'Etna Fatmini, SKM, M.kes', '1', '196405051986032003'),
+('P07', 'Seksi Farmasi dan Perbekalan Kesehatan', 'Desmiaty,S.AP', '1', '1966120919099012001'),
+('P08', 'Seksi Pencegahan dan Pemberantasan Penyakit', 'Dr.H.Yorisa Sativa,M.Kes', '1', '197407142002121009'),
+('P09', 'Seksi Penyehatan Lingkungan', 'Anhar Hadian, SKM', '1', '197206111995031003'),
+('P10', 'Seksi Pelayanan Kesehatan Dasar', 'Dr.Hj.Fetty Sugiharti,M.KM', '1', '196407031990022001'),
+('P11', 'Seksi Pelayanan Kesehatan Khusus', 'Dr.Ira Dewi Jani,MT', '1', '197406012005012006');
 
 -- --------------------------------------------------------
 
@@ -99,7 +109,7 @@ CREATE TABLE `penelitian` (
 --
 
 INSERT INTO `penelitian` (`id_penelitian`, `waktu_pembuatan`, `jenis_surat`, `maksud`, `waktu_mulai`, `waktu_selesai`, `no_bkbpm`, `tanggal_bkbpm`, `surat`, `no_surat`, `tanggal_surat`, `tembusan`, `id_pejabat`, `id_pengaju`, `status_mail`) VALUES
-(1, '2016-01-06', 'penelitian', 'Pengambilan Data di Lingkungan Dinas Kesehatan Kota Bandung yang terkait tentang Sikap dan Komunitas', '2015-01-07', '2016-07-07', '070/30/BKBPM', '2016-01-07', 'b.	Surat permohonan dari Wakil Dekan Fak Keperawatan UNPAD N0. 4714/UN6.L1/PP/2015  , Tanggal 30 Desember   2015', '4714/UN6.L1/PP/2015', '2015-12-30', '4,3,1,0', 'P01', 5, ''),
+(1, '2016-01-06', 'penelitian', 'Pengambilan Data di Lingkungan Dinas Kesehatan Kota Bandung yang terkait tentang Sikap dan Komunitas', '2015-01-07', '2016-07-07', '070/30/BKBPM', '2016-01-07', 'b.	Surat permohonan dari Wakil Dekan Fak Keperawatan UNPAD N0. 4714/UN6.L1/PP/2015  , Tanggal 30 Desember   2015', '4714/UN6.L1/PP/2015', '2015-12-30', '4,3,1,0', 'P01', 5, 'sudah'),
 (2, '2016-01-06', 'penelitian', 'Pengambilan Data di Lingkungan Dinas Kesehatan Kota Bandung yang terkait tentang Hubungan Tingkat Pe', '2015-01-27', '2016-07-27', '070/197/BKBPM', '2016-01-27', 'b.	Surat permohonan dari Dekan FK Unisba No. 035/Dek/FK-k/Skr/I/2016 , Tanggal 12 Januari 2016', '035/Dek/FK-k/Skr/I/2016', '2016-01-12', '4,2,1,0', 'P01', 6, ''),
 (3, '2016-01-06', 'penelitian', 'Pengambilan Data di Lingkungan Dinas Kesehatan Kota Bandung yang terkait tentang Analisa Faktor yang', '2015-01-18', '2016-07-18', '070/120/BKBPM', '2016-01-18', 'b.	Surat permohonan dari  Ketua Prodi S1 Ilmu Kesehatan Masyarakat STIKes Dharma Husada No.001/SDHB/SIP/PSKMS/I/2016 , Tanggal 13 Januari    2016', '001/SDHB/SIP/PSKMS/I/2016', '2016-01-13', '4,3,1,0', 'P01', 7, ''),
 (4, '2016-01-06', 'penelitian', 'Pengambilan Data di Lingkungan Dinas Kesehatan Kota Bandung yang terkait tentang Gambaran Respon Ber', '2016-01-15', '2016-07-15', '070/105/BKBPM', '2016-01-15', 'b.	Surat permohonan dari  Fak Keperawatan UNPAD No. 132/UN6.L1/PP/2016  , Tanggal 13 Januari    2015', '132/UN6.L1/PP/2016', '2016-01-13', '4,2,1,0', 'P01', 8, ''),
@@ -375,7 +385,7 @@ INSERT INTO `penelitian` (`id_penelitian`, `waktu_pembuatan`, `jenis_surat`, `ma
 (287, '2016-03-22', 'penelitian', 'Pengambilan Data di Lingkungan Dinas Kesehatan Kota Bandung yang terkait tentang Konsumsi Buah-Buahan dan Tingkat Kesehatan Anak-Anak', '2016-03-16', '2016-09-16', '070/637/BKBPM', '2016-03-16', 'Universitas TELKOM ', '1351/AKD1/SCI/2015 ', '2016-02-05', '4,2,1,0', 'P01', 278, ''),
 (288, '2016-10-13', 'pkl_medis', 'Kerja Praktek', '2016-09-01', '2016-10-31', '1', '2016-10-01', 'SMK Merdeka', '1', '2016-10-01', '8,0', 'P01', 279, ''),
 (289, '2016-10-13', 'pkl_medis', 'Kerja Praktek', '2016-08-28', '2016-09-25', '2', '2016-10-01', 'Unpas', '1', '2016-10-01', '8,0', 'P01', 280, ''),
-(290, '2016-10-13', 'pkl', 'Kerja Praktek', '2016-08-15', '2016-10-15', '3', '2016-08-01', 'Unikom', '3', '2016-08-01', '8,0', 'P01', 281, 'sudah'),
+(290, '2016-10-13', 'pkl', 'Kerja Praktek', '2016-08-15', '2016-12-31', '3', '2016-08-01', 'Unikom', '3', '2016-08-01', '8,0', 'P01', 281, 'sudah'),
 (291, '2016-10-13', 'pkl', 'Kerja Praktek', '2016-08-01', '2016-08-31', '4', '2016-10-31', '4', '4', '2016-10-01', '8,0', 'P01', 282, ''),
 (292, '2016-10-13', 'pkl', 'kerja praktek', '2016-07-01', '2016-09-28', '5', '2016-10-13', '5', '5', '2016-10-13', '8,0', 'P01', 283, ''),
 (293, '2016-01-01', 'pkl', 'Kerja Praktek', '2016-01-10', '2016-03-10', '7', '2016-01-10', 'SMK Provita', '7', '2016-01-10', '8,0', 'P01', 284, ''),
@@ -388,7 +398,37 @@ INSERT INTO `penelitian` (`id_penelitian`, `waktu_pembuatan`, `jenis_surat`, `ma
 (303, '2016-10-14', 'pkl', 'Kerja Praktek', '2016-03-23', '2016-08-23', '1', '2016-10-14', '1', '1', '2016-10-14', '8,0', 'P01', 293, ''),
 (304, '2016-10-14', 'pkl', 'Kerja Praktek', '2016-05-18', '2016-07-18', '1', '2016-10-14', '1', '1', '2016-10-14', '8,0', 'P01', 294, ''),
 (305, '2016-10-14', 'pkl', 'Kerja Praktek', '2016-05-16', '2016-06-16', '1', '2016-10-14', '1', '1', '2016-10-14', '8,0', 'P01', 295, ''),
-(306, '2016-10-14', 'penelitian', 'Melakukan Permintaan Data Tentang Pekan Imunisasi Nasional Tahun 2016', '2016-10-11', '2017-04-11', '070/1782/BKBPM', '2016-10-11', 'Wakil Dekan Bidang Akademik Fakultas Ilmu Komunikasi UNPAD', '12043/UN6.K6/PP/2016', '2016-10-10', '5,4,3,1,0', 'P01', 296, '');
+(306, '2016-10-14', 'penelitian', 'Melakukan Permintaan Data Tentang Pekan Imunisasi Nasional Tahun 2016', '2016-10-11', '2017-04-11', '070/1782/BKBPM', '2016-10-11', 'Wakil Dekan Bidang Akademik Fakultas Ilmu Komunikasi UNPAD', '12043/UN6.K6/PP/2016', '2016-10-10', '5,4,3,1,0', 'P01', 296, ''),
+(307, '2016-11-18', 'penelitian', 'ds', '2016-11-18', '2016-11-18', 'as', '2016-11-18', 'asd', 'sad', '2016-11-18', '5,4,3,2,1,0', 'P01', 297, ''),
+(308, '2016-11-19', 'pkl_medis', 'wakwkwwkwkwk', '2016-11-19', '2016-12-23', 'qwdsad', '2016-11-19', 'ad', 'adas', '2016-11-19', '3,2,1,0', 'P01', 298, ''),
+(309, '2016-11-19', 'pkl', 'lsdkjf', '2016-11-19', '2016-12-22', 'skfaslk', '2016-11-19', 'asldkjf', 'alskdj', '2016-11-19', '4,3,2,1,0', 'P01', 299, ''),
+(310, '2016-11-19', 'penelitian', 'lsdalsdkj', '2016-11-19', '2016-12-31', 'slkdjf', '2016-11-19', 'lkdjfsalfj', 'slks', '2016-11-19', '3,2,1,0', 'P01', 300, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penempatan`
+--
+
+CREATE TABLE `penempatan` (
+  `id_penempatan` int(11) NOT NULL,
+  `id_penelitian` int(11) NOT NULL,
+  `id_pejabat` char(8) NOT NULL,
+  `bagian` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `penempatan`
+--
+
+INSERT INTO `penempatan` (`id_penempatan`, `id_penelitian`, `id_pejabat`, `bagian`) VALUES
+(23, 288, 'P02', 'Seksi Promosi Kesehatan'),
+(24, 290, 'P07', 'Seksi Pelayanan Kesehatan Khusus'),
+(25, 289, 'P02', 'Seksi Data dan Informasi Program Kesehatan'),
+(26, 308, 'P02', 'Seksi Data dan Informasi Program Kesehatan'),
+(27, 309, 'P04', 'Seksi Pendayagunaan Tenaga dan Sarana Kesehatan'),
+(28, 310, 'P03', 'Seksi Evaluasi Program Kesehatan'),
+(29, 29, 'P04', 'Seksi Farmasi dan Perbekalan Kesehatan');
 
 -- --------------------------------------------------------
 
@@ -409,11 +449,7 @@ CREATE TABLE `pengaju` (
 --
 
 INSERT INTO `pengaju` (`id_pengaju`, `nama`, `alamat`, `institusi`, `mail`) VALUES
-(1, 'lakdfjs', 'slkdjfas', 'sladjf', ''),
-(2, 'a', 'vvv', '', ''),
-(3, 'aaa', 'aaa', '', ''),
-(4, 'asdasdasd', 'asdasdas\r\nasdasasdas\r\ndasd', 'asdasd', ''),
-(5, 'Abdul Aziz', 'Komp uri Fajar D N0.36 Kec imahi Selatan Kota Cimahi', 'Universitas Padjajaran (UNPAD)', ''),
+(5, 'Abdul Aziz', 'Komp uri Fajar D N0.36 Kec imahi Selatan Kota Cimahi', 'Universitas Padjajaran (UNPAD)', 'zamzam_nurzaman@outlook.com'),
 (6, 'Agnita Putri Fadhilah', 'Jl.Andani Sakti No.134 Cibitung Bekasi Kab Bekasi', 'Universitas Islam Bandung (UNISBA)', ''),
 (7, 'Aisya Fitrianita', 'Ds.Ngampal Rt.02/01 Kec.Sumber Rejo Kab.Bojonegoro', 'STIKes Dharma Husada', ''),
 (8, 'Algia Nuruliani', 'Jl. Ters Cikajang Raya 1 N0.102 Kec Arcamanik Kota Bandung', 'Universitas Padjajaran (UNPAD)', ''),
@@ -696,7 +732,6 @@ INSERT INTO `pengaju` (`id_pengaju`, `nama`, `alamat`, `institusi`, `mail`) VALU
 (285, 'Erma Rahayunita', 'Sekeloa', 'STIMIK LPKIA', ''),
 (286, 'Sindi Kotavera, Dini Noviani, Soppy Nursoleha, Tessa Tiara, Amelia Inggrid, Putri Pratiwi, Nani Nadiani, Femelia Fizki P, Rizki Nur A, Rike Setyowati, Debby Nurmayanti', 'Sekeloa', 'SMK Kencana', ''),
 (287, 'Sindi Kotavera, Dini Noviani, Soppy Nursoleha, Tessa Tiara, Amelia Inggrid, Putri Pratiwi, Nani Nadiani, Femelia Fizki P, Rizki Nur A, Rike Setyowati, Debby Nurmayanti', 'Sekelo', 'SMK Kencana', ''),
-(288, 'asd', 'asd', 'asdas', 'as'),
 (289, 'Jesica Danu P, Mega Susilawati, Yulita Dewi, Yulianti, Tessa Lonica, Wulan Amalia, Aresti Selviani D', 'Sekeloa', 'SMK Kencana', ''),
 (290, 'Gina Yuhana', 'Sekeloa', 'Politeknik LP3I Bandung', ''),
 (291, 'Sandy Windarwanto', 'Sekeloa', 'CSBI Bandung', ''),
@@ -704,56 +739,11 @@ INSERT INTO `pengaju` (`id_pengaju`, `nama`, `alamat`, `institusi`, `mail`) VALU
 (293, 'Fitriani Sudarman', 'Sekeloa', 'Universitas Komputer Indonesia (UNIKOM)', ''),
 (294, 'Davila Rubianti A, Jesica Grace N Sm Zahra Muthia K', 'Sekeloa', 'Universitas Padjajaran (UNPAD)', ''),
 (295, 'Riyana Hardianto, Septian Sakti T L', 'Sekeloa', 'Universitas Jenderal Achmad Yani (UNJANI)', ''),
-(296, 'Fristia Dwi Anugrah', 'Jl. Numbing No.7 Kecamatan Bukit Lestari Kota Tanjung Pinang', 'Universitas Padjajaran (UNPAD)', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pengajuan`
---
-
-CREATE TABLE `pengajuan` (
-  `id_pengajuan` int(11) NOT NULL,
-  `id_penelitian` int(11) NOT NULL,
-  `id_pengaju` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rel_tembusan`
---
-
-CREATE TABLE `rel_tembusan` (
-  `id_penelitian` int(11) NOT NULL,
-  `id_tembusan` char(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tembusan`
---
-
-CREATE TABLE `tembusan` (
-  `id_tembusan` char(4) NOT NULL,
-  `nama` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tembusan`
---
-
-INSERT INTO `tembusan` (`id_tembusan`, `nama`) VALUES
-('T01', 'Kepala Dinas Kesehatan Kota Bandung (Sebagai Laporan)'),
-('T02', 'Kepala Bidang Pelayanan Kesehatan'),
-('T03', 'Kepala Bidang Sumber Daya Kesehatan'),
-('T04', 'Kepala Bidang P2PL'),
-('T05', 'Kepala UPT Puskesmas Se-Kota Bandung'),
-('T06', 'Kepala Bina Program Kesehatan'),
-('T07', 'Kepala Sub Bagian Keuangan'),
-('T08', 'Kepala Sub Bagian Kepegawaian'),
-('T09', 'Kepala Sub Bagian Umum');
+(296, 'Fristia Dwi Anugrah', 'Jl. Numbing No.7 Kecamatan Bukit Lestari Kota Tanjung Pinang', 'Universitas Padjajaran (UNPAD)', ''),
+(297, 'asd', 'das', 'Universitas Komputer Indonesia (UNIKOM)', 'asdasd'),
+(298, 'zame wakwak', 'wakwak', 'Universitas Komputer Indonesia (UNIKOM)', ''),
+(299, 'puad wakwak', 'alskdjfslkdj', 'Universitas Padjajaran (UNPAD)', ''),
+(300, 'yuyus wakwak', 'askdjfaaldskjf', 'Universitas Padjajaran (UNPAD)', 'asdfasdf');
 
 --
 -- Indexes for dumped tables
@@ -781,25 +771,19 @@ ALTER TABLE `penelitian`
   ADD KEY `id_pengaju` (`id_pengaju`);
 
 --
+-- Indexes for table `penempatan`
+--
+ALTER TABLE `penempatan`
+  ADD PRIMARY KEY (`id_penempatan`),
+  ADD KEY `id_penelitian` (`id_penelitian`),
+  ADD KEY `id_pejabat` (`id_pejabat`);
+
+--
 -- Indexes for table `pengaju`
 --
 ALTER TABLE `pengaju`
   ADD PRIMARY KEY (`id_pengaju`),
   ADD KEY `id_pengaju` (`id_pengaju`);
-
---
--- Indexes for table `rel_tembusan`
---
-ALTER TABLE `rel_tembusan`
-  ADD KEY `id_penelitian` (`id_penelitian`),
-  ADD KEY `id_tembusan` (`id_tembusan`);
-
---
--- Indexes for table `tembusan`
---
-ALTER TABLE `tembusan`
-  ADD PRIMARY KEY (`id_tembusan`),
-  ADD KEY `id_tembusan` (`id_tembusan`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -814,12 +798,17 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `penelitian`
 --
 ALTER TABLE `penelitian`
-  MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
+  MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=311;
+--
+-- AUTO_INCREMENT for table `penempatan`
+--
+ALTER TABLE `penempatan`
+  MODIFY `id_penempatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `pengaju`
 --
 ALTER TABLE `pengaju`
-  MODIFY `id_pengaju` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
+  MODIFY `id_pengaju` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
 --
 -- Constraints for dumped tables
 --
@@ -832,11 +821,11 @@ ALTER TABLE `penelitian`
   ADD CONSTRAINT `penelitian_ibfk_2` FOREIGN KEY (`id_pengaju`) REFERENCES `pengaju` (`id_pengaju`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `rel_tembusan`
+-- Constraints for table `penempatan`
 --
-ALTER TABLE `rel_tembusan`
-  ADD CONSTRAINT `rel_tembusan_ibfk_1` FOREIGN KEY (`id_tembusan`) REFERENCES `tembusan` (`id_tembusan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `rel_tembusan_ibfk_2` FOREIGN KEY (`id_penelitian`) REFERENCES `penelitian` (`id_penelitian`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `penempatan`
+  ADD CONSTRAINT `penempatan_ibfk_1` FOREIGN KEY (`id_penelitian`) REFERENCES `penelitian` (`id_penelitian`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `penempatan_ibfk_2` FOREIGN KEY (`id_pejabat`) REFERENCES `pejabat` (`id_pejabat`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
